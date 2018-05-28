@@ -1,4 +1,4 @@
-/* function f1 () {
+ function f1 () {
     var str = prompt('Enter any words here');
     var count = 0;
     var letters = "аоиеёэыуюя";
@@ -12,9 +12,9 @@
     return count;
 }
 console.log(f1());
- */
 
-function f2 () {
+
+/* function f2 () {
 var s = prompt("enter string").toLowerCase();
 var count = 0;
 function ff (str) {
@@ -31,4 +31,4 @@ function ff (str) {
 }
 return ff(s);
 }
-console.log(f2());
+console.log(f2()); */
