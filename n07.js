@@ -1,5 +1,4 @@
- function f1 () {
-    var str = prompt('Enter any words here');
+function f1 (str) {
     var count = 0;
     var letters = "аоиеёэыуюя";
     for (var i=0; i<str.length; i++) {
@@ -11,7 +10,6 @@
     }
     return count;
 }
-console.log(f1());
 
 
 /* function f2 () {
