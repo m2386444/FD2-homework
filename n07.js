@@ -2,7 +2,7 @@ function f1 (str) {
     var count = 0;
     var letters = "аоиеёэыуюя";
     for (var i=0; i<str.length; i++) {
-        if (letters.indexOf(str[i]) >= 0) {
+        if (letters.indexOf(str.toLowerCase()[i]) >= 0) {
             count += 1;
         } else {
             continue;
