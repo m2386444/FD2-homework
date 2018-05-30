@@ -10,7 +10,7 @@ function f1 (str) {
     }
     return count;
 }
-
+console.log(f1(prompt('enter string')));
 
 /* function f2 () {
 var s = prompt("enter string").toLowerCase();
