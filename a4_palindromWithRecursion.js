@@ -1,4 +1,4 @@
-function isPalRec (arg) {
+/* function isPalRec (arg) {
     var strLow = arg.toLowerCase();
     var newStr = '';
     var abc = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz1234567890';
@@ -23,8 +23,37 @@ function isPalRec (arg) {
         return true;
     }
     return true;
+} */
+
+function isPalRec (arg) {
+    var strLow = arg.toLowerCase();
+    var newStr = '';
+    var abc = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz1234567890';
+    for (var i=0; i<strLow.length; i++) {
+        if (abc.indexOf(strLow[i]) >= 0) {
+            if (strLow[i] == 'ъ') {
+                newStr += 'ь';
+            } else if (strLow[i] == 'ё') {
+                newStr += 'е';
+            } else {
+                newStr += strLow[i];
+            }
+        }
+    }
+    if(newStr.length<=1){
+        return true;
+    } else if(newStr.length>1) {
+        isPalRec(arg.slice(0, arg.length-1));
+    }
+    return true;
 }
+
 console.warn('Аргумент: ' + '|' + 'Муммам' + '| ' + 'Результат: ' + isPalRec('Муммам'));
+console.warn('Аргумент: ' + '|' + 'Мdfgvhbjnkmтоирмпм' + '| ' + 'Результат: ' + isPalRec('Мdfgvhbjnkmтоирмпм'));
+console.warn('Аргумент: ' + '|' + 'УвымуУ' + '| ' + 'Результат: ' + isPalRec('УвымуУ'));
+console.warn('Аргумент: ' + '|' + 'вукрпьнатв' + '| ' + 'Результат: ' + isPalRec('вукрпьнатв'));
+console.log('Аргумент: ' + '|' + 'Мм' + '| ' + 'Результат: ' + isPalRec('Мм'));
+console.log('Аргумент: ' + '|' + 'М    м' + '| ' + 'Результат: ' + isPalRec('М    м'));
 console.log('Аргумент: ' + '|' + 'РАдар' + '| ' + 'Результат: ' + isPalRec('РАдар'));
 console.log('Аргумент: ' + '|' + 'Нажал кабан на баклажан' + '| ' + 'Результат: ' + isPalRec('Нажал кабан на баклажан'));
 console.log('Аргумент: ' + '|' + 'А Лида свечку чукче всадила.' + '| ' + 'Результат: ' + isPalRec('А Лида свечку чукче всадила.'));
