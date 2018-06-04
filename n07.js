@@ -10,7 +10,7 @@ function f1 (str) {
     }
     return count;
 }
-console.log(f1(prompt('enter string'))); */
+console.log(f1(prompt('enter string')));
 
 
 
