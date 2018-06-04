@@ -27,39 +27,36 @@
 
 // LIFO
 // FIFO
-// повторить arr.reduce(); (на собес)
+// повторить arr.reduce()
 // повторить хеш как счетчик
 //N10
 //N17
 
-
-"use strict";
-
 function isPalRec (arg) {
     var strLow = arg.toLowerCase();
     var newStr = '';
-    var abc = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz1234567890';
+    var abc = 'абвгдеёжзийклмнопрстуфхцчшщыэюяabcdefghijklmnopqrstuvwxyz1234567890';
     for (var i=0; i<strLow.length; i++) {
         if (abc.indexOf(strLow[i]) >= 0) {
-            if (strLow[i] == 'ъ') {
-                newStr += 'ь';
-            } else if (strLow[i] == 'ё') {
+            if (strLow[i] == 'ё') {
                 newStr += 'е';
             } else {
                 newStr += strLow[i];
             }
         }
     }
-    if (newStr.length<=1) {
-        return true;
-    } else {
-        if (newStr[0] != newStr[newStr.length-1]) {
-            return false;
+    function f (par) {
+        if (par.length<=1) {
+            return true;
         } else {
-            return isPalRec(newStr.slice(1, newStr.length-1));
+            if (par[0] != par[par.length-1]) {
+                return false;
+            } else {
+                return f(par.slice(1, par.length-1));
+            }
         }
     }
-    return;
+    return f(newStr);
 }
 
 console.log('Аргумент: ' + '|' + 'Муммам' + '| ' + 'Результат: ' + isPalRec('Муммам'));
@@ -80,3 +77,14 @@ console.log('Аргумент: ' + '|' + 'Мария Ире во дворе: "Н
 console.log('Аргумент: ' + '|' + 'Угар! Враг на воле! Мститель летит смело в ангар врагу!' + '| ' + 'Результат: ' + isPalRec('Угар! Враг на воле! Мститель летит смело в ангар врагу!'));
 console.log('Аргумент: ' + '|' + 'ууе! ЁУУ!' + '| ' + 'Результат: ' + isPalRec('ууе! ЁУУ!'));
 console.log('Аргумент: ' + '|' + 'В' + '| ' + 'Результат: ' + isPalRec('В'));
+
+
+
+/* function global (arg1, arg2) {
+    var prom = arg1 + arg2;
+    function duble (par) {
+        var res = par * par;
+        return res;
+    }
+    return duble(prom);
+} */
