@@ -2,7 +2,7 @@ function f1 (str) {
     var count = 0;
     var arr = str.toLowerCase().split('');
     var letters = "аоиеёэыуюя";
-    arr.forEach(function(item, i, arr) {
+    arr.forEach(function(item) {
         if (letters.indexOf(item) >= 0) {
             count++;
         }
@@ -12,7 +12,7 @@ function f1 (str) {
 console.log(f1(prompt("enter few words")));
 
 
-var  f2 = (str) => str.toLowerCase().split('').filter(function(item, i, arr) {
+var  f2 = (str) => str.toLowerCase().split('').filter(function(item) {
         return "аоиеёэыуюя".indexOf(item) >= 0
         }).length;
 console.log(f2(prompt("enter few words")));
