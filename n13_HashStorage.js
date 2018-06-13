@@ -9,7 +9,13 @@
         }
         getValue(key) {
             if (key in this) {
-                return this[key];
+                var res = "напиток: " + key + "\n";
+                for (var prop in this[key]) {
+                    res += prop + ': ' + this[key][prop] + "\n";
+                    res = res.replace("true", "да");
+                    res = res.replace("false", "нет");
+                }
+                return res;
             } else {
                 return undefined;
             }
@@ -31,20 +37,23 @@
 
 function av () {
     drinkStorage.addValue(prompt('Введите название напитка'), {'алкогольный': confirm('Напиток алкогольный? OK - да, Отмена - нет'), 'крепость': prompt('Введите крепость напитка'), 'рецепт приготовления': prompt('Введите рецепт приготовления')});
+    if (drinkStorage.null) {
+        delete drinkStorage.null;
+    }
 }
-function gv (arg = prompt('What kind of drink are you interested in?')) {
+function gv (arg = prompt('Какой напиток показать?')) {
     if (arg in drinkStorage) {
         console.log(drinkStorage.getValue(arg));
     } else {
-        console.log('"' + arg + '"' + ' ' + 'not found');
+        console.log('Напиток ' + '"' + arg + '"' + ' ' + 'не найден');
     }
 }
-function dv (arg = prompt('Which drink do you wont to delete?')) {
+function dv (arg = prompt('Какой напиток удалить?')) {
     if (arg in drinkStorage) {
         delete drinkStorage[arg];
-        console.log('"' + arg + '"' + ' ' + 'removed');
+        console.log('Напиток' + '"' + arg + '"' + ' ' + 'удален');
     } else {
-        console.log('Spirit not found');
+        console.log('Напиток не найден');
     }
 }
 function l () {
