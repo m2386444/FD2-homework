@@ -43,9 +43,9 @@ function av () {
 }
 function gv (arg = prompt('Какой напиток показать?')) {
     if (arg in drinkStorage) {
-        console.log(drinkStorage.getValue(arg));
+        alert(drinkStorage.getValue(arg));
     } else {
-        console.log('Напиток ' + '"' + arg + '"' + ' ' + 'не найден');
+        alert('Напиток ' + '"' + arg + '"' + ' ' + 'не найден');
     }
 }
 function dv (arg = prompt('Какой напиток удалить?')) {
