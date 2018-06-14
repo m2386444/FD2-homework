@@ -31,14 +31,14 @@ var drinkStorage = new HashStorage;
 
 
 function av () {
-    drinkStorage.addValue(prompt('Введите название напитка'), {'алкогольный': confirm('Напиток алкогольный? OK - да, Отмена - нет'), 'крепость': prompt('Введите крепость напитка'), 'рецепт приготовления': prompt('Введите рецепт приготовления')});
+    drinkStorage.addValue(prompt('Введите название напитка'), {'Алкогольный': confirm('Напиток алкогольный? OK - да, Отмена - нет'), 'Крепость, %': prompt('Введите крепость напитка'), 'Рецепт приготовления': prompt('Введите рецепт приготовления'), 'Рекомендуемая доза': prompt('Введите рекомендуемую дозу', '0')});
     if (Object.keys(drinkStorage.storage).indexOf("null") > -1) {
         delete drinkStorage.storage[null];
     }
 }
 function gv (arg = prompt('Какой напиток показать?')) {
     if (Object.keys(drinkStorage.storage).indexOf(arg) > -1) {
-        var res = "напиток: " + arg + "\n";
+        var res = "Напиток: " + arg + "\n";
         for (var prop in drinkStorage.getValue(arg)) {
             res += prop + ': ' + drinkStorage.getValue(arg)[prop] + "\n";
             res = res.replace("true", "да");
@@ -52,20 +52,21 @@ function gv (arg = prompt('Какой напиток показать?')) {
 function dv (arg = prompt('Какой напиток удалить?')) {
     if (Object.keys(drinkStorage.storage).indexOf(arg) > -1) {
         delete drinkStorage.storage[arg];
-        console.log('Напиток ' + '"' + arg + '"' + ' ' + 'удален');
+        alert('Напиток ' + '"' + arg + '"' + ' ' + 'удален');
     } else {
-        console.log('Напиток не найден');
+        alert('Напиток не найден');
     }
 }
 function l () {
-    console.log(drinkStorage.getKeys());
+    alert(drinkStorage.getKeys());
 }
 
 
 
-drinkStorage.addValue('Текила', {'алкогольный': 'true', 'крепость': '38%', 'рецепт приготовления': 'salt + spirit + lime'});
-drinkStorage.addValue('Водка', {'алкогольный': 'true', 'крепость': '40%'});
-drinkStorage.addValue('Маргарита', {'алкогольный': 'true', 'крепость': '12%'});
+drinkStorage.addValue('текила', {'алкогольный': 'true', 'крепость': '38%', 'рецепт приготовления': 'salt + spirit + lime'});
+drinkStorage.addValue('водка', {'алкогольный': 'true', 'крепость': '40%'});
+drinkStorage.addValue('маргарита', {'Алкогольный': 'true', 'Крепость': '12%', 'Рецепт': 'лаймовый сок + сахарный сироп + ликер трипл сек + серебряная текила', 'Рекомендуемая доза': '3-5шт'});
+drinkStorage.addValue('коньяк', {'Алкогольный': 'true', 'Крепость': '40%', 'Рецепт': 'водка + сахар + кора дуба + специи', 'Рекомендуемая доза': '3-5шт'});
     
     
     
