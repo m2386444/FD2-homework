@@ -1,57 +1,58 @@
 'use strict';
 
-    class HashStorage {
-        constructor () {
-            //console.log('конструктор сработал');
-        }
-        addValue(name, value) {
-            this[name] = value;
-        }
-        getValue(key) {
-            if (key in this) {
-                var res = "напиток: " + key + "\n";
-                for (var prop in this[key]) {
-                    res += prop + ': ' + this[key][prop] + "\n";
-                    res = res.replace("true", "да");
-                    res = res.replace("false", "нет");
-                }
-                return res;
-            } else {
-                return undefined;
-            }
-        }
-        deleteValue(key) {
-            if(key in this) {
-                delete this[key];
-                return true;
-            } else {
-                return false;
-            }
-        }
-        getKeys() {
-            return Object.keys(this);
+class HashStorage {
+    constructor () {
+        this.storage = {};
+    }
+    addValue(name, value) {
+        this.storage[name] = value;
+    }
+    getValue(key) {
+        if (Object.keys(this.storage).indexOf(key) > -1) {
+            return this.storage[key];
+        } else {
+            return undefined;
         }
     }
+    deleteValue(key) {
+        if(Object.keys(this.storage).indexOf(key) > -1) {
+            delete this.storage[key];
+            return true;
+        } else {
+            return false;
+        }
+    }
+    getKeys() {
+        return Object.keys(this.storage);
+    }
+}
     
-    var drinkStorage = new HashStorage;
+var drinkStorage = new HashStorage;
+
 
 function av () {
     drinkStorage.addValue(prompt('Введите название напитка'), {'алкогольный': confirm('Напиток алкогольный? OK - да, Отмена - нет'), 'крепость': prompt('Введите крепость напитка'), 'рецепт приготовления': prompt('Введите рецепт приготовления')});
-    if (drinkStorage.null) {
-        delete drinkStorage.null;
+    if (Object.keys(drinkStorage.storage).indexOf("null") > -1) {
+        delete drinkStorage.storage[null];
     }
 }
 function gv (arg = prompt('Какой напиток показать?')) {
-    if (arg in drinkStorage) {
-        alert(drinkStorage.getValue(arg));
+    if (Object.keys(drinkStorage.storage).indexOf(arg) > -1) {
+        var res = "напиток: " + arg + "\n";
+        for (var prop in drinkStorage.getValue(arg)) {
+            res += prop + ': ' + drinkStorage.getValue(arg)[prop] + "\n";
+            res = res.replace("true", "да");
+            res = res.replace("false", "нет");
+        }
+        alert(res);
     } else {
         alert('Напиток ' + '"' + arg + '"' + ' ' + 'не найден');
     }
 }
 function dv (arg = prompt('Какой напиток удалить?')) {
-    if (arg in drinkStorage) {
-        delete drinkStorage[arg];
-        console.log('Напиток' + '"' + arg + '"' + ' ' + 'удален');
+    if (Object.keys(drinkStorage.storage).indexOf(arg) > -1) {
+        delete drinkStorage.storage[arg];
+        console.log('Напиток ' + '"' + arg + '"' + ' ' + 'удален');
     } else {
         console.log('Напиток не найден');
     }
