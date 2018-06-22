@@ -24,7 +24,7 @@ var formDef1=
 var formElement = document.forms.targ;
 
 function makeForm (frm, arr) {
-    frm.innerHTML = '';
+//    frm.innerHTML = '';
     for (var i=0; i<arr.length; i++) {
         var txt = '<span>'+arr[i]['label']+'</span>';
         if (arr[i]['kind'] == 'longtext') {
@@ -34,7 +34,7 @@ function makeForm (frm, arr) {
         } else if (arr[i]['kind'] == 'shorttext') {
             frm.innerHTML += txt + '<input type="text" '+'name="'+arr[i]['name']+'" style="width: 50%"/><br/>'
         } else if (arr[i]['kind'] == 'submit') {
-            frm.innerHTML += '<input type="submit" value="' + arr[i]['label'].slice(0, -1) + '"' + '/><br/>'
+            frm.innerHTML += '<input type="submit" value="' + arr[i]['label'].slice(0, -1) + '"' + '/><br/><hr/>'
         } else if (arr[i]['kind'] == 'combo') {
             var opt = '';
             for (var n=0; n<arr[i]['variants'].length; n++) {
@@ -61,6 +61,7 @@ return
 }
 
 makeForm(formElement, formDef1);
+makeForm(formElement, formDef2);
 
 /* size="'+arr[i]['variants'].length+'" */
 
