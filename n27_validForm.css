@@ -1,0 +1,11 @@
+.txt {
+position: absolute;
+}
+.lineMarginLeft {
+    margin-left: 250px;
+}
+.mist {
+    font-size: 0.7em;
+    padding-left: 5px;
+    color: red;
+}
