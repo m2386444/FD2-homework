@@ -38,22 +38,29 @@ window.onload = function () {
     var formElem = document.forms.targ;
 
     formElem.onsubmit = formValid;
-    function formValid () {
-        var j = descriptionValid(1);
-        var i = planValid(1);
-        var h = reviewValid(1);
-        var g = headingValid(1);
-        var f = emailValid(1);
-        var e = visitorsValid(1);
-        var d = startDateValid(1);
-        var c = siteUrlValid(1);
-        var b = siteNameValid(1);
-        var a = devValid(1);
-        
-        if (a&&b&&c&&d&&e&&f&&g&&h&&i&&j) {
-            return true;
-        } else {
-            return false;
+    function formValid (EO) {
+        EO=EO||window.event;
+        try {
+            var j = descriptionValid(1);
+            var i = planValid(1);
+            var h = reviewValid(1);
+            var g = headingValid(1);
+            var f = emailValid(1);
+            var e = visitorsValid(1);
+            var d = startDateValid(1);
+            var c = siteUrlValid(1);
+            var b = siteNameValid(1);
+            var a = devValid(1);
+            
+            if (a&&b&&c&&d&&e&&f&&g&&h&&i&&j) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        catch (ex) {
+            console.log('Аларм!');
+            EO.preventDefault();
         }
     }
 
