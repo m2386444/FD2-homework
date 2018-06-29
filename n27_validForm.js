@@ -4,61 +4,65 @@ window.onload = function () {
         var e = inputLineElem[i];
         e.className = 'lineMarginLeft line';
     }
-    var devElem = document.getElementById('dev');
+    var devElem = document.getElementById('dev');   //проверка на пустую строку
     var devMistElem = document.getElementById('devMist');
 
-    var siteNameElem = document.getElementById('siteName');
+    var siteNameElem = document.getElementById('siteName'); //проверка на пустую строку
     var siteNameMistElem = document.getElementById('siteNameMist');
     
-    var siteUrlElem = document.getElementById('siteUrl');
+    var siteUrlElem = document.getElementById('siteUrl'); //проверка на url
     var siteUrlMistElem = document.getElementById('siteUrlMist');
     
-    var startDateElem = document.getElementById('startTime');
+    var startDateElem = document.getElementById('startTime'); //проверка на правильный формат даты
     var startDateMistElem = document.getElementById('startTimeMist');
     
-    var visitorsElem = document.getElementById('visitors');
+    var visitorsElem = document.getElementById('visitors'); //проверка на положительное число
     var visitorsMistElem = document.getElementById('visitorsMist');
     
-    var emailElem = document.getElementById('email');
+    var emailElem = document.getElementById('email'); //проверка на правильность формата email
     var emailMistElem = document.getElementById('emailMist');
     
-    var headingElem = document.getElementById('heading');
+    var headingElem = document.getElementById('heading');   //допускается только второе значение (домашний уют)
     var headingMistElem = document.getElementById('headingMist');
     
-    var plan1Elem = document.getElementById('elem1');
+    var plan1Elem = document.getElementById('elem1');   //допускается только первое (беспланое) значение, а при отправке проверяется также выбран ли хоть один из пунктов
     var plan2Elem = document.getElementById('elem2');
     var plan3Elem = document.getElementById('elem3');
     var plansMistElem = document.getElementById('plansMist');
     
-    var reviewElem = document.getElementById('review');
+    var reviewElem = document.getElementById('review'); //необходимо отметить чекбокс
     var reviewMistElem = document.getElementById('reviewMist');
-    
-    var descriptionElem = document.getElementById('description');
+    var descriptionElem = document.getElementById('description'); //проверка на пустую строку
     var descriptionMistElem = document.getElementById('descriptionMist');
     
     var formElem = document.forms.targ;
 
-    formElem.onsubmit = function () {
-        var a = devValid();
-        var b = siteNameValid();
-        var c = siteUrlValid();
-        var d = startDateValid();
-        var e = visitorsValid();
-        var f = emailValid();
-        var g = headingValid();
-        var h
-        var i
-        var j = descriptionValid();
-        if (a&&b&&c&&d&&e&&f&&g&&j) {
+    formElem.onsubmit = formValid;
+    function formValid () {
+        var j = descriptionValid(1);
+        var i = planValid(1);
+        var h = reviewValid(1);
+        var g = headingValid(1);
+        var f = emailValid(1);
+        var e = visitorsValid(1);
+        var d = startDateValid(1);
+        var c = siteUrlValid(1);
+        var b = siteNameValid(1);
+        var a = devValid(1);
+        
+        if (a&&b&&c&&d&&e&&f&&g&&h&&i&&j) {
             return true;
         } else {
             return false;
         }
     }
 
-    function devValid () {
+    function devValid (param) {
         if (devElem.value == '') {
             devShowMist();
+            if(param==1){
+                devElem.focus();
+            }
             return false;
         } else {
             devElem.style.background = 'green';
@@ -70,11 +74,14 @@ window.onload = function () {
         devElem.style.background = 'red';
         devMistElem.innerHTML = 'Введите корректное значение!';
     }
-devElem.onblur = devValid;
+    devElem.onblur = devValid;
 
-    function siteNameValid () {
+    function siteNameValid (param) {
         if (siteNameElem.value == '') {
             siteNameShowMist();
+            if(param==1){
+                siteNameElem.focus();
+            }
             return false;
         } else {
             siteNameElem.style.background = 'green';
@@ -86,11 +93,15 @@ devElem.onblur = devValid;
         siteNameElem.style.background = 'red';
         siteNameMistElem.innerHTML = 'Введите корректное значение!';
     }
-siteNameElem.onblur = siteNameValid;
+    siteNameElem.onblur = siteNameValid;
 
-    function siteUrlValid () {
-        if (siteUrlElem.value == '') {
+    function siteUrlValid (param) {
+        var r = /^(ftp|http|https):\/\/[^ "]+$/;
+        if (!r.test(siteUrlElem.value)) {
             siteUrlShowMist();
+            if(param==1){
+                siteUrlElem.focus();
+            }
             return false;
         } else {
             siteUrlElem.style.background = 'green';
@@ -102,11 +113,15 @@ siteNameElem.onblur = siteNameValid;
         siteUrlElem.style.background = 'red';
         siteUrlMistElem.innerHTML = 'Введите корректное значение!';
     }
-siteUrlElem.onblur = siteUrlValid;
+    siteUrlElem.onblur = siteUrlValid;
 
-    function startDateValid () {
-        if (startDateElem.value == '') {
+    function startDateValid (param) {
+        var r = /^(?=\d{2}([-.,\/])\d{2}\1\d{4}$)(?:0[1-9]|1\d|[2][0-8]|29(?!.02.(?!(?!(?:[02468][1-35-79]|[13579][0-13-57-9])00)\d{2}(?:[02468][048]|[13579][26])))|30(?!.02)|31(?=.(?:0[13578]|10|12))).(?:0[1-9]|1[012]).\d{4}$/;
+        if (!r.test(startDateElem.value)) {
             startDateShowMist();
+            if(param==1){
+                startDateElem.focus();
+            }
             return false;
         } else {
             startDateElem.style.background = 'green';
@@ -118,11 +133,14 @@ siteUrlElem.onblur = siteUrlValid;
         startDateElem.style.background = 'red';
         startDateMistElem.innerHTML = 'Введите корректное значение!';
     }
-startDateElem.onblur = startDateValid;
+    startDateElem.onblur = startDateValid;
 
-    function visitorsValid () {
+    function visitorsValid (param) {
         if (visitorsElem.value == '' || +visitorsElem.value < 0) {
             visitorsShowMist();
+            if(param==1){
+                visitorsElem.focus();
+            }
             return false;
         } else {
             visitorsElem.style.background = 'green';
@@ -134,7 +152,7 @@ startDateElem.onblur = startDateValid;
         visitorsElem.style.background = 'red';
         visitorsMistElem.innerHTML = 'Введите корректное значение!';
     }
-visitorsElem.onblur = visitorsValid;
+    visitorsElem.onblur = visitorsValid;
 
     function emailValid () {
         var r = /^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i;
@@ -149,9 +167,9 @@ visitorsElem.onblur = visitorsValid;
     }
     function emailShowMist () {
         emailElem.style.background = 'red';
-        emailMistElem.innerHTML = 'Введите корректное значение!';
+        emailMistElem.innerHTML = 'Введите корректное значение по примеру!';
     }
-emailElem.onblur = emailValid;
+    emailElem.onblur = emailValid;
 
     function headingValid () {
         if (headingElem.value == '3' || headingElem.value == '1') {
@@ -167,138 +185,67 @@ emailElem.onblur = emailValid;
         headingElem.style.background = 'red';
         headingMistElem.innerHTML = 'На данный момент размещаем сайты только о доме и уюте!';
     }
-headingElem.onblur = headingValid;
-headingElem.onchange = headingValid;
+    headingElem.onblur = headingValid;
+    headingElem.onchange = headingValid;
 
 
 
-function descriptionValid () {
-    if (descriptionElem.value == '') {
-        descriptionShowMist();
-        return false;
-    } else {
-        descriptionElem.style.background = 'green';
-        descriptionMistElem.innerHTML = '';
-        return true;
-    }
-}
-function descriptionShowMist () {
-    descriptionElem.style.background = 'red';
-    descriptionMistElem.innerHTML = 'Введите корректное значение!';
-}
-descriptionElem.onblur = descriptionValid;
 
-/*     devElem.onblur = devValid;
-    function devValid () {
-        if (devElem.value == ''){
-            devElem.style.background = 'red';
-            devMistElem.innerHTML = 'Введите корректное значение!';
-            devV = false;
-        } else {
-            devElem.style.background = 'none';
-            devMistElem.innerHTML = '';
-            devV = true;
-        }
-    }
-    siteNameElem.onblur = siteNameValid;
-    function siteNameValid () {
-        if (siteNameElem.value == ''){
-            siteNameElem.style.background = 'red';
-            siteNameMistElem.innerHTML = 'Введите корректное значение!';
-            snV = false;
-        } else {
-            siteNameElem.style.background = 'none';
-            siteNameMistElem.innerHTML = '';
-            snV = true;
-        }
-    }*/
-/*     siteUrlElem.onblur = siteUrlValid;
-    function siteUrlValid () {
-        if (siteUrlElem.value == ''){
-            siteUrlElem.style.background = 'red';
-            siteUrlMistElem.innerHTML = 'Введите корректное значение!';
-            suV = false;
-        } else {
-            siteUrlElem.style.background = 'none';
-            siteUrlMistElem.innerHTML = '';
-            suV = true;
-        }
-    }
-    startDateElem.onblur = startDateValid;
-    function startDateValid () {
-        if (startDateElem.value == ''){
-            startDateElem.style.background = 'red';
-            startDateMistElem.innerHTML = 'Введите корректное значение!';
-        } else {
-            startDateElem.style.background = 'none';
-            startDateMistElem.innerHTML = '';
-        }
-    }
-    visitorsElem.onblur = visValid;
-    function visValid () {
-        if (visitorsElem.value == ''){
-            visitorsElem.style.background = 'red';
-            visitorsMistElem.innerHTML = 'Введите корректное значение!';
-        } else if (+startDateElem.value < 0) {
-            visitorsMistElem.innerHTML = 'слишком мало!';
-        } else {
-            visitorsElem.style.background = 'none';
-            visitorsMistElem.innerHTML = '';
-        }
-    }
-    emailElem.onblur = emailValid;
-    function emailValid() {
-        var r = /^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i;
-        if (!r.test(emailElem.value)) {
-            emailElem.style.background = 'red';
-            emailMistElem.innerHTML = 'Введите корректное значение!';
-        } else {
-            emailElem.style.background = 'none';
-            emailMistElem.innerHTML = '';
-        }
-    }
-    headingElem.onchange = heaValid;
-    function heaValid() {
-        if (headingElem.value == '3'){
-            headingElem.style.background = 'red';
-            headingMistElem.innerHTML = 'Введите корректное значение!';
-        } else {
-            headingElem.style.background = 'none';
-            headingMistElem.innerHTML = '';
-        }
-    }
-    headingElem.onblur = headingElem.onchange;
 
-    plan3Elem.onchange = plan3Valid;
-    function plan3Valid () {
-        if (plan3Elem.checked) {
-            plansMistElem.innerHTML = 'Это дорого! Начните с малого!';
+    plan3Elem.onchange = plan2Elem.onchange = plan1Elem.onchange = planValid;
+    function planValid (param) {
+        if (plan3Elem.checked || plan2Elem.checked) {
+            plansMist();
+            if (param==1) {
+                plan1Elem.focus();
+            }
+        } else if (!plan1Elem.checked&&!plan2Elem.checked&&!plan3Elem.checked) {
+            plansMist();
+            if (param==1) {
+                plan1Elem.focus();
+            }
         } else {
             plansMistElem.innerHTML = '';
+            return true;
         }
     }
-    plan1Elem.onchange = plan3Elem.onchange;
-    plan2Elem.onchange = plan1Elem.onchange;
+    function plansMist () {
+        plansMistElem.innerHTML = 'Первое размещение - только бесплатное!';
+    }
 
-    reviewElem.onchange = revValid;
-    function revValid () {
-        if (reviewElem.checked) {
-            reviewElem.style.background = 'none';
+    function reviewValid (param) {
+        if (!reviewElem.checked) {
+            reviewShowMist();
+            if(param==1){
+                reviewElem.focus();
+            }
+            return false;
+        } else {
+            reviewElem.style.background = 'green';
             reviewMistElem.innerHTML = '';
-        } else {
-            reviewElem.style.background = 'red';
-            reviewMistElem.innerHTML = 'Разрешите отзывы!';
+            return true;
         }
     }
-    descriptionElem.onblur = desValid;
-    function desValid () {
-        if (descriptionElem.value == ''){
-            descriptionElem.style.background = 'red';
-            descriptionMistElem.innerHTML = 'Не оставляйте поле пустым и введите корректное значение!';
+    function reviewShowMist () {
+        reviewElem.style.background = 'red';
+        reviewMistElem.innerHTML = 'Разрешите отзывы!';
+    }
+    reviewElem.onblur = reviewValid;
+    reviewElem.onchange = reviewValid;
+
+    function descriptionValid () {
+        if (descriptionElem.value == '') {
+            descriptionShowMist();
+            return false;
         } else {
-            descriptionElem.style.background = 'none';
+            descriptionElem.style.background = 'green';
             descriptionMistElem.innerHTML = '';
+            return true;
         }
     }
-     */
+    function descriptionShowMist () {
+        descriptionElem.style.background = 'red';
+        descriptionMistElem.innerHTML = 'Введите корректное значение!';
+    }
+    descriptionElem.onblur = descriptionValid;
 }
