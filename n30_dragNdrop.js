@@ -32,6 +32,7 @@ function dragStart(eo) {
     shiftX = eo.clientX - getCoords(eo.target).left;
     shiftY = eo.clientY - getCoords(eo.target).top;
     eo.target.style.opacity = '0';  
+    // eo.target.style.cursor = 'pointer';
 }
 function dragEnd(eo) {
     eo=eo||window.event;
@@ -52,7 +53,8 @@ function dragOver(eo) {
     eo=eo||winow.event;
     eo.preventDefault();
 }
-function dragging(eo) {
-    eo=eo||window.event;
-    console.log('+++move+++');
-}
+// function dragging(eo) {
+//     eo=eo||window.event;
+//     console.log('+++move+++');
+//     eo.currentTarget.style.cursor = 'ponter';
+// }
