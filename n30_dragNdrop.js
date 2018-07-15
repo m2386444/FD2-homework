@@ -2,11 +2,12 @@
 var draggedElem = null;
 var shiftX;
 var shiftY;
+let zI = 1;
+
 window.addEventListener('load', positions);
-document.body.addEventListener('dragstart', dragStart);
-document.body.addEventListener('dragend', dragEnd);
-document.body.addEventListener('dragover', dragOver);
-document.body.addEventListener('drop', contDrop);
+document.body.addEventListener('mousedown', md);
+document.body.addEventListener('mouseup', mu);
+document.body.addEventListener('mousemove', mm);
 
 function positions() {
     var imgElems = document.getElementsByTagName('img');
@@ -26,19 +27,38 @@ function getCoords(elem) {
         left: box.left + pageXOffset
     }
 }
-function dragStart(eo) {
+
+
+
+
+/* function dragStart(eo) {
     eo=eo||window.event;
     draggedElem = eo.target;
     shiftX = eo.clientX - getCoords(eo.target).left;
     shiftY = eo.clientY - getCoords(eo.target).top;
     eo.target.style.opacity = '0';  
     // eo.target.style.cursor = 'pointer';
-}
-function dragEnd(eo) {
+} */
+function md(eo) {
     eo=eo||window.event;
-    draggedElem = null;
+    draggedElem = eo.target;
+    shiftX = eo.clientX - getCoords(eo.target).left;
+    shiftY = eo.clientY - getCoords(eo.target).top;
+    eo.target.style.cursor = 'move';
 }
-function contDrop(eo) {
+function mm(eo) {
+    eo=eo||window.event;
+    eo.preventDefault();
+    if (draggedElem) {
+        zI++;
+        eo.target.style.cursor = 'crosshair';
+        draggedElem.style.zIndex = zI;
+        draggedElem.style.left = eo.clientX - shiftX + 'px';
+        draggedElem.style.top =  eo.clientY - shiftY + 'px';
+    }
+}
+
+/* function contDrop(eo) {
     eo=eo||window.event;
     eo.preventDefault();
     if (draggedElem) {
@@ -48,13 +68,15 @@ function contDrop(eo) {
         draggedElem.style.top =  eo.clientY - shiftY + 'px';
         draggedElem.style.opacity = '1';
     }
-}
-function dragOver(eo) {
+} */
+function mu(eo) {
     eo=eo||winow.event;
     eo.preventDefault();
+    eo.target.style.cursor = 'initial';
+    draggedElem = null;
 }
 // function dragging(eo) {
-//     eo=eo||window.event;
-//     console.log('+++move+++');
-//     eo.currentTarget.style.cursor = 'ponter';
-// }
+    //     eo=eo||window.event;
+    //     console.log('+++move+++');
+    //     eo.currentTarget.style.cursor = 'ponter';
+    // }
