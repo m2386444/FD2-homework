@@ -51,7 +51,7 @@ function mm(eo) {
     eo.preventDefault();
     if (draggedElem) {
         zI++;
-        eo.target.style.cursor = 'crosshair';
+        // eo.target.style.cursor = 'crosshair';
         draggedElem.style.zIndex = zI;
         draggedElem.style.left = eo.clientX - shiftX + 'px';
         draggedElem.style.top =  eo.clientY - shiftY + 'px';
