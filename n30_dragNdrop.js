@@ -7,7 +7,6 @@ let zI = 1;
 window.addEventListener('load', positions);
 document.body.addEventListener('mousedown', md);
 document.body.addEventListener('mouseup', mu);
-document.body.addEventListener('mousemove', mm);
 
 function positions() {
     var imgElems = document.getElementsByTagName('img');
@@ -45,10 +44,12 @@ function md(eo) {
     shiftX = eo.clientX - getCoords(eo.target).left;
     shiftY = eo.clientY - getCoords(eo.target).top;
     eo.target.style.cursor = 'move';
+    document.body.addEventListener('mousemove', mm);
 }
 function mm(eo) {
     eo=eo||window.event;
     eo.preventDefault();
+    // console.log('move')
     if (draggedElem) {
         zI++;
         // eo.target.style.cursor = 'crosshair';
@@ -73,6 +74,7 @@ function mu(eo) {
     eo=eo||winow.event;
     eo.preventDefault();
     eo.target.style.cursor = 'initial';
+    document.body.removeEventListener('mousemove', mm);
     draggedElem = null;
 }
 // function dragging(eo) {
