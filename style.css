@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+#clock {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 301px;
+    height: 301px;
+    border-radius: 50%;
+    background: rgb(220, 170, 70);
+}
+.clockCenter {
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: 0px;
+    height: 0px;
+    background: black;
+    z-index: 2;
+}
+.lin {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: black;
+}
+.hourLin {
+    width: 5px;
+    height: 50px;
+    transform: translateY(-50px) translateX(-2px) rotate(30deg);
+    transform-origin: 50% 100%;
+    position: absolute;
+}
+.minuteLin {
+    width: 3px;
+    height: 105px;
+    transform: translateY(-105px) translateX(-1.25px) rotate(65deg);
+    transform-origin: 50% 100%;
+    position: absolute;
+}
+.secondLin {
+    width: 1px;
+    height: 130px;
+    transform: translateY(-130px) translateX(-0.25px);
+    transform-origin: 50% 100%;
+    position: absolute;
+}
+.secondTransform {
+    transform: rotate()
+}
+.num {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: black;
+    border-radius: 50%;
+    background: rgb(100, 225, 80);
+    z-index: 1;
+}
+#di {
+    position: absolute;
+    left: 105px;
+    top: 200px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: 90px;
+    height: 20px;
+    background: gray;
+}

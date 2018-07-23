@@ -1,0 +1,25 @@
+{
+  "name": "fd2-homework",
+  "version": "1.0.0",
+  "description": "thin is my homework",
+  "main": "a2_spaceDelete.js",
+  "dependencies": {
+    "babel-loader": "^7.1.5",
+    "node-sass": "^4.9.2",
+    "webpack": "^3.12.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m2386444/FD2-homework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m2386444/FD2-homework/issues"
+  },
+  "homepage": "https://github.com/m2386444/FD2-homework#readme"
+}
