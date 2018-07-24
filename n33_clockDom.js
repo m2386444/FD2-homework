@@ -61,7 +61,7 @@ var clockBoard = document.getElementById('clock');
     clockBoard.appendChild(dial);
     
     //update time functions
-    setInterval(updateTime, 1000);
+    setInterval(updateTime, 0);
     function updateTime() {
         var curTime = new Date();
         var curTimeStr = formatDateTime(curTime);
@@ -144,18 +144,13 @@ var clockBoard = document.getElementById('clock');
             secondGo(seconds);
         }
         setPositions();
-
         function str0l(val,len) {
             var strVal=val.toString();
             while ( strVal.length < len )
             strVal='0'+strVal;
             return strVal;
         }
+        clockBoard.style.opacity = '1';
         return str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2);
     }
 })();
-
-
-
-
-

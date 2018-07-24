@@ -3,6 +3,7 @@ body {
     padding: 0;
 }
 #clock {
+    opacity: 0;
     margin: 0;
     padding: 0;
     position: relative;
@@ -29,14 +30,14 @@ body {
 .hourLin {
     width: 5px;
     height: 50px;
-    transform: translateY(-50px) translateX(-2px) rotate(30deg);
+    transform: translateY(-50px) translateX(-2px);
     transform-origin: 50% 100%;
     position: absolute;
 }
 .minuteLin {
     width: 3px;
     height: 105px;
-    transform: translateY(-105px) translateX(-1.25px) rotate(65deg);
+    transform: translateY(-105px) translateX(-1.25px);
     transform-origin: 50% 100%;
     position: absolute;
 }
