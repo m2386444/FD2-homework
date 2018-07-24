@@ -25,13 +25,13 @@ var clockBoard = document.getElementById('clock');
     minuteLine.disabled = true;
     minuteLine.className += 'lin minuteLin';
     clockBoardCenter.appendChild(minuteLine);
-        var secondLine = document.createElement('input');
+    var secondLine = document.createElement('input');
     secondLine.type = 'button'
     secondLine.disabled = true;
     secondLine.className += 'lin secondLin secondTransform';
     clockBoardCenter.appendChild(secondLine);
     
-
+    
     
     //create and set position to digits of the dial
     var radius = 120;
@@ -61,8 +61,17 @@ var clockBoard = document.getElementById('clock');
     clockBoard.appendChild(dial);
     
     //update time functions
-    setInterval(updateTime, 0);
+    var timer = 0;
+    timer = setTimeout(updateTime, 0);
+    setInterval(updateTime, 1000);
+    function stopTimer () {
+        if (timer !== 0) {
+            clearTimeout(timer);
+        } else {
+        }
+    }
     function updateTime() {
+        stopTimer();
         var curTime = new Date();
         var curTimeStr = formatDateTime(curTime);
         document.getElementById('di').innerHTML = curTimeStr;
@@ -77,7 +86,7 @@ var clockBoard = document.getElementById('clock');
             hou = 0;
             var minAngle = 0;
             var houAngle = 0;
-        
+            
             function getHou (param) {
                 switch(param) {
                     case 24:
@@ -150,8 +159,7 @@ var clockBoard = document.getElementById('clock');
             strVal='0'+strVal;
             return strVal;
         }
-        clockBoard.style.opacity = '1';
+        // clockBoard.style.opacity = '1';
         return str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2);
     }
-
 })();
