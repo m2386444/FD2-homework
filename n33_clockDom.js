@@ -159,7 +159,7 @@ var clockBoard = document.getElementById('clock');
             strVal='0'+strVal;
             return strVal;
         }
-        // clockBoard.style.opacity = '1';
+        clockBoard.style.opacity = '1';
         return str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2);
     }
 })();
