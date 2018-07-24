@@ -67,7 +67,6 @@ var clockBoard = document.getElementById('clock');
     function stopTimer () {
         if (timer !== 0) {
             clearTimeout(timer);
-        } else {
         }
     }
     function updateTime() {
