@@ -62,15 +62,15 @@ var clockBoard = document.getElementById('clock');
     
     //update time functions
     var timer = 0;
-    timer = setTimeout(updateTime, 0);
+    timer = setTimeout(updateTimeStopTimeout, 0);
     setInterval(updateTime, 1000);
-    function stopTimer () {
+    function updateTimeStopTimeout () {
+        updateTime();
         if (timer !== 0) {
             clearTimeout(timer);
         }
     }
     function updateTime() {
-        stopTimer();
         var curTime = new Date();
         var curTimeStr = formatDateTime(curTime);
         document.getElementById('di').innerHTML = curTimeStr;
