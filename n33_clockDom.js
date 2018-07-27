@@ -1,6 +1,6 @@
 'use strict'
 const HOURS = 12; //digits on the dial
-const ANGLE_TO_NEXT_DIGIT = 30;
+const ANGLE_TO_NEXT_DIGIT = 360/HOURS;
 var clockBoard = document.getElementById('clock');
 
 (function (){
