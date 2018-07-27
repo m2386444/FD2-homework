@@ -55,9 +55,9 @@ var clockBoard = document.getElementById('clock');
     dial.id = 'di';
     clockBoard.appendChild(dial);
     
+    //update time functions
     updateTime();
     
-    //update time functions
     setInterval(updateTime, 1000);
     function updateTime() {
         var curTime = new Date();
