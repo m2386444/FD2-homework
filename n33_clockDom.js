@@ -18,7 +18,7 @@ var clockBoard = document.getElementById('clock');
     hourLine.disabled = true;
     hourLine.className += 'lin hourLin';
     clockBoardCenter.appendChild(hourLine);
-        var minuteLine = document.createElement('input');
+    var minuteLine = document.createElement('input');
     minuteLine.type = 'button'
     minuteLine.disabled = true;
     minuteLine.className += 'lin minuteLin';
@@ -28,7 +28,7 @@ var clockBoard = document.getElementById('clock');
     secondLine.disabled = true;
     secondLine.className += 'lin secondLin secondTransform';
     clockBoardCenter.appendChild(secondLine);
-
+    
     //create and set position to digits of the dial
     var radius = clockBoard.offsetHeight/2.5;
     var _angle = 360/12;
@@ -54,7 +54,9 @@ var clockBoard = document.getElementById('clock');
     var dial = document.createElement('span');
     dial.id = 'di';
     clockBoard.appendChild(dial);
+    
     updateTime();
+    
     //update time functions
     setInterval(updateTime, 1000);
     function updateTime() {
