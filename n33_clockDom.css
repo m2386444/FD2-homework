@@ -3,14 +3,13 @@ body {
     padding: 0;
 }
 #clock {
-    opacity: 0;
+    border-radius: 50%;
     margin: 0;
     padding: 0;
     position: relative;
-    width: 301px;
-    height: 301px;
-    border-radius: 50%;
-    background: rgb(220, 170, 70);
+    width: 300px;
+    height: 300px;
+    background: rgb(192, 178, 151);
 }
 .clockCenter {
     margin: 0;
@@ -22,6 +21,7 @@ body {
     z-index: 2;
 }
 .lin {
+    border-radius: 50%;
     margin: 0;
     padding: 0;
     border: none;
@@ -30,21 +30,19 @@ body {
 .hourLin {
     width: 5px;
     height: 50px;
-    transform: translateY(-50px) translateX(-2px);
     transform-origin: 50% 100%;
     position: absolute;
 }
 .minuteLin {
     width: 3px;
     height: 105px;
-    transform: translateY(-105px) translateX(-1.25px);
     transform-origin: 50% 100%;
     position: absolute;
 }
 .secondLin {
+    background-color: red;
     width: 1px;
     height: 130px;
-    transform: translateY(-130px) translateX(-0.25px);
     transform-origin: 50% 100%;
     position: absolute;
 }
