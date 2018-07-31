@@ -1,66 +1,92 @@
 'use strict'
-const HOURS = 12; //digits on the dial
-const ANGLE_TO_NEXT_DIGIT = 30;
-var clockBoard = document.getElementById('clock');
+const HOURS = 12; //колличество цифр на циферблате
+const ANGLE_TO_NEXT_DIGIT = 30; //шаг в градусах(для третьей и последующих цифр циферблата)
+var _angle = 360/12; //начальный шаг в градусах(для второй цифры)
+var radius = 120; // радиус расположения цифр на циферблате
 
 (function (){
-    //crate and set position to center of clock board
-        var clockBoardCenter = document.createElement('div');
-    clockBoardCenter.className += 'clockCenter';
-    clockBoardCenter.style.position = 'absolute';
-    clockBoardCenter.style.left = clockBoard.offsetWidth/2 + 'px';
-    clockBoardCenter.style.top = clockBoard.offsetHeight/2 + 'px';
-    clockBoard.appendChild(clockBoardCenter);
-    
-    //crate and set position to hour hands
-        var hourLine = document.createElement('input');
-    hourLine.type = 'button';
-    hourLine.disabled = true;
-    hourLine.className += 'lin hourLin';
-    clockBoardCenter.appendChild(hourLine);
-        var minuteLine = document.createElement('input');
-    minuteLine.type = 'button'
-    minuteLine.disabled = true;
-    minuteLine.className += 'lin minuteLin';
-    clockBoardCenter.appendChild(minuteLine);
-    var secondLine = document.createElement('input');
-    secondLine.type = 'button'
-    secondLine.disabled = true;
-    secondLine.className += 'lin secondLin secondTransform';
-    clockBoardCenter.appendChild(secondLine);
+    var clockBoard = document.getElementById('clock');
+    clockBoard.setAttribute('width', '300');
+    clockBoard.setAttribute('height', '300');
+    var circ = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circ.setAttribute('cx', '150')
+    circ.setAttribute('cy', '150')
+    circ.setAttribute('r', '150')
+    circ.setAttribute('fill', 'rgb(192, 178, 151)')
+    clockBoard.appendChild(circ);
 
-    //create and set position to digits of the dial
-    var radius = clockBoard.offsetHeight/2.5;
-    var _angle = 360/12;
     for (var i=1; i<=HOURS; i++) {
-        var curNum = document.createElement('input');
-        curNum.type = 'button'
-        curNum.disabled = true;
-        curNum.value = [i];
-        curNum.className += 'num';
-        curNum.style.width = clockBoard.offsetWidth/7 + 'px';
-        curNum.style.height = clockBoard.offsetHeight/7 + 'px';
+        var curNum = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         var angle = _angle/180*Math.PI;
-        var centCenterX = clockBoardCenter.offsetLeft+clockBoardCenter.offsetWidth/2;
-        var centCenterY = clockBoardCenter.offsetTop+clockBoardCenter.offsetHeight/2;
-        var numCenterX = centCenterX+radius*Math.sin(angle);
-        var numCenterY = centCenterY-radius*Math.cos(angle);
-        curNum.style.left = Math.round(numCenterX-parseInt(curNum.style.width)/2)+'px';
-        curNum.style.top = Math.round(numCenterY-parseInt(curNum.style.height)/2)+'px';   
+        var centerX = clockBoard.width.baseVal.value/2;
+        var centerY = clockBoard.height.baseVal.value/2;
+        curNum.setAttribute('fill', 'rgb(100, 225, 80)');
+        curNum.setAttribute('r', clockBoard.width.baseVal.value/15);
+        curNum.setAttribute('cx', Math.round(centerX+radius*Math.sin(angle)));
+        curNum.setAttribute('cy', Math.round(centerY-radius*Math.cos(angle)));
+        var curNumText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        curNumText.setAttribute('x', Math.round(centerX+radius*Math.sin(angle))- curNum.r.baseVal.value/2);
+        curNumText.setAttribute('y', Math.round(centerY-radius*Math.cos(angle)) + curNum.r.baseVal.value/2);
+        curNumText.textContent = i;
         _angle += ANGLE_TO_NEXT_DIGIT;
         clockBoard.appendChild(curNum);
+        clockBoard.appendChild(curNumText);
     }
-    //create and set position of dial
-    var dial = document.createElement('span');
-    dial.id = 'di';
-    clockBoard.appendChild(dial);
+    
+    var secondLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    secondLine.setAttribute('x1', '150')
+    secondLine.setAttribute('y1', '150')
+    secondLine.setAttribute('x2', '150')
+    secondLine.setAttribute('y2', '25')
+    secondLine.setAttribute('stroke', 'red')
+    secondLine.setAttribute('stroke-width', '1')
+    secondLine.setAttribute('transform-origin', '50%')
+    secondLine.setAttribute('id', 'sL')
+    clockBoard.appendChild(secondLine);
+    var minuteLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    minuteLine.setAttribute('x1', '150px')
+    minuteLine.setAttribute('y1', '150px')
+    minuteLine.setAttribute('x2', '150px')
+    minuteLine.setAttribute('y2', '45px')
+    minuteLine.setAttribute('stroke', 'black')
+    minuteLine.setAttribute('stroke-width', '3px')
+    minuteLine.setAttribute('transform-origin', '50%')
+    minuteLine.setAttribute('id', 'mL')
+    clockBoard.appendChild(minuteLine);
+    var hourLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    hourLine.setAttribute('x1', '150px')
+    hourLine.setAttribute('y1', '150px')
+    hourLine.setAttribute('x2', '150px')
+    hourLine.setAttribute('y2', '85px')
+    hourLine.setAttribute('stroke', 'black')
+    hourLine.setAttribute('stroke-width', '5px')
+    hourLine.setAttribute('transform-origin', '50%')
+    hourLine.setAttribute('id', 'hL')
+    clockBoard.appendChild(hourLine);
+
+    var secondLin = document.getElementById('sL');
+    var minuteLin = document.getElementById('mL');
+    var hourLin = document.getElementById('hL');
+        
     updateTime();
-    //update time functions
     setInterval(updateTime, 1000);
+
     function updateTime() {
         var curTime = new Date();
         var curTimeStr = formatDateTime(curTime);
-        document.getElementById('di').innerHTML = curTimeStr;
+        function createDial (param) {
+            if (!document.getElementById('di')) {
+                var dial = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                dial.setAttribute('id', 'di');
+                dial.setAttribute('x', clockBoard.width.baseVal.value/3)
+                dial.setAttribute('y', clockBoard.height.baseVal.value/1.5)
+                dial.textContent = param;
+                clockBoard.appendChild(dial);
+            } else {
+                document.getElementById('di').textContent = param;
+            }
+        }
+        createDial(curTimeStr);
     }    
     function formatDateTime(dt) {
         var hours=dt.getHours();
@@ -77,9 +103,9 @@ var clockBoard = document.getElementById('clock');
             var houAngle = 0;
             minAngle = minutes/60*360+360/60*seconds/60;
             houAngle = hours%12/12*360+360/12*minutes/60;
-            secondLine.style.transform = 'translateY(' + (-secondLine.offsetHeight) + 'px)' + 'translateX(' + (-secondLine.offsetWidth/2) + 'px)' + 'rotate(' + seconds/60*360 + 'deg)';
-            minuteLine.style.transform = 'translateY(' + (-minuteLine.offsetHeight) + 'px)' + 'translateX(' + (-minuteLine.offsetWidth/2) + 'px)' + 'rotate(' + minAngle + 'deg';
-            hourLine.style.transform = 'translateY(' + (-hourLine.offsetHeight) + 'px)' + 'translateX(' + (-hourLine.offsetWidth/2) + 'px)' + 'rotate(' + houAngle + 'deg)';
+            secondLin.style.transform = 'rotate(' + seconds/60*360 + 'deg)';
+            minuteLin.style.transform = 'rotate(' + minAngle + 'deg';
+            hourLin.style.transform =  'rotate(' + houAngle + 'deg)';
         }
         setPositions();
         return str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2);
