@@ -3,11 +3,13 @@ const HOURS = 12; //колличество цифр на циферблате
 const ANGLE_TO_NEXT_DIGIT = 30; //шаг в градусах(для третьей и последующих цифр циферблата)
 var _angle = 360/12; //начальный шаг в градусах(для второй цифры)
 var radius = 120; // радиус расположения цифр на циферблате
+var fs = 18; //высота текста цифр
 
 (function (){
     var clockBoard = document.getElementById('clock');
     clockBoard.setAttribute('width', '300');
     clockBoard.setAttribute('height', '300');
+    
     var circ = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     circ.setAttribute('cx', '150')
     circ.setAttribute('cy', '150')
@@ -25,8 +27,11 @@ var radius = 120; // радиус расположения цифр на циф�
         curNum.setAttribute('cx', Math.round(centerX+radius*Math.sin(angle)));
         curNum.setAttribute('cy', Math.round(centerY-radius*Math.cos(angle)));
         var curNumText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        curNumText.setAttribute('x', Math.round(centerX+radius*Math.sin(angle))- curNum.r.baseVal.value/2);
-        curNumText.setAttribute('y', Math.round(centerY-radius*Math.cos(angle)) + curNum.r.baseVal.value/2);
+        curNumText.setAttribute('font-size', fs);
+        curNumText.setAttribute('textLength', curNum.r.baseVal.value);
+        curNumText.setAttribute('x', i > 9 ? Math.round(centerX+radius*Math.sin(angle)) - curNumText.textLength.baseVal.value/2 : Math.round(centerX+radius*Math.sin(angle)) - curNumText.textLength.baseVal.value/4);
+        curNumText.setAttribute('y', Math.round(centerY-radius*Math.cos(angle)) + fs/2.5);
+
         curNumText.textContent = i;
         _angle += ANGLE_TO_NEXT_DIGIT;
         clockBoard.appendChild(curNum);
@@ -78,7 +83,7 @@ var radius = 120; // радиус расположения цифр на циф�
             if (!document.getElementById('di')) {
                 var dial = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 dial.setAttribute('id', 'di');
-                dial.setAttribute('x', clockBoard.width.baseVal.value/3)
+                dial.setAttribute('x', clockBoard.width.baseVal.value/2.8)
                 dial.setAttribute('y', clockBoard.height.baseVal.value/1.5)
                 dial.textContent = param;
                 clockBoard.appendChild(dial);
