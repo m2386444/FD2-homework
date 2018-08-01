@@ -43,6 +43,7 @@ var fs = 18; //высота текста часовых делений
     secondLine.setAttribute('y2', '25')
     secondLine.setAttribute('stroke', 'red')
     secondLine.setAttribute('stroke-width', '1')
+    secondLine.setAttribute('stroke-linecap', 'round')
     secondLine.setAttribute('transform-origin', '50%')
     secondLine.setAttribute('id', 'sL')
     clockBoard.appendChild(secondLine);
@@ -53,6 +54,7 @@ var fs = 18; //высота текста часовых делений
     minuteLine.setAttribute('y2', '45px')
     minuteLine.setAttribute('stroke', 'black')
     minuteLine.setAttribute('stroke-width', '3px')
+    minuteLine.setAttribute('stroke-linecap', 'round')
     minuteLine.setAttribute('transform-origin', '50%')
     minuteLine.setAttribute('id', 'mL')
     clockBoard.appendChild(minuteLine);
@@ -63,6 +65,7 @@ var fs = 18; //высота текста часовых делений
     hourLine.setAttribute('y2', '85px')
     hourLine.setAttribute('stroke', 'black')
     hourLine.setAttribute('stroke-width', '5px')
+    hourLine.setAttribute('stroke-linecap', 'round')
     hourLine.setAttribute('transform-origin', '50%')
     hourLine.setAttribute('id', 'hL')
     clockBoard.appendChild(hourLine);
