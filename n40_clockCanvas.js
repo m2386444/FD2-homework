@@ -9,6 +9,9 @@ function go () {
     let ctx = cvs.getContext('2d');
     let centerX = cvs.width/2;
     let centerY = cvs.height/2;
+    let secondLineLength = centerY-30; //длина секундной стрелки
+    let minuteLineLength = centerY-60; //длина минутной стрелки
+    let hourLineLength = centerY-100; //длина часовой стрелки
     ctx.fillStyle = 'rgb(192, 178, 151)';
     ctx.beginPath();
     ctx.arc(cvs.width/2, cvs.height/2, clockR, 0, Math.PI*2, false);
@@ -43,9 +46,9 @@ function go () {
             let secondAng = 360/60/180*Math.PI*seconds;
             let minuteAng = 360/60/180*Math.PI*minutes+360/60/60/180*Math.PI*seconds;
             let hourAng = 360/12/180*Math.PI*hours+360/12/60/180*Math.PI*minutes;
-            let secondR = centerY - 30;
-            let minuteR = centerY - 60;
-            let hourR = centerY - 100;
+            let secondR = secondLineLength;
+            let minuteR = minuteLineLength;
+            let hourR = hourLineLength;
             
             ctx.beginPath();
             ctx.moveTo(centerX, centerY);
