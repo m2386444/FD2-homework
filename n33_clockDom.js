@@ -1,6 +1,5 @@
 'use strict'
 const HOURS = 12; //digits on the dial
-const ANGLE_TO_NEXT_DIGIT = 360/HOURS;
 var clockBoard = document.getElementById('clock');
 
 (function (){
@@ -40,14 +39,13 @@ var clockBoard = document.getElementById('clock');
         curNum.className += 'num';
         curNum.style.width = clockBoard.offsetWidth/7 + 'px';
         curNum.style.height = clockBoard.offsetHeight/7 + 'px';
-        var angle = _angle/180*Math.PI;
+        var angle = _angle*i/180*Math.PI;
         var centCenterX = clockBoardCenter.offsetLeft+clockBoardCenter.offsetWidth/2;
         var centCenterY = clockBoardCenter.offsetTop+clockBoardCenter.offsetHeight/2;
         var numCenterX = centCenterX+radius*Math.sin(angle);
         var numCenterY = centCenterY-radius*Math.cos(angle);
         curNum.style.left = Math.round(numCenterX-parseInt(curNum.style.width)/2)+'px';
         curNum.style.top = Math.round(numCenterY-parseInt(curNum.style.height)/2)+'px';   
-        _angle += ANGLE_TO_NEXT_DIGIT;
         clockBoard.appendChild(curNum);
     }
     //create and set position of dial

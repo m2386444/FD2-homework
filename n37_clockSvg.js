@@ -1,7 +1,6 @@
 'use strict'
 const HOURS = 12; //колличество делений на циферблате
-const ANGLE_TO_NEXT_DIGIT = 30; //шаг в градусах(для третьего и последующих делений циферблата)
-var _angle = 360/12; //начальный шаг в градусах(для второго деления)
+var _angle = 360/HOURS; //начальный шаг в градусах(для второго деления)
 var radius = 120; // радиус расположения делений на циферблате
 var fs = 18; //высота текста часовых делений
 
@@ -18,7 +17,7 @@ var fs = 18; //высота текста часовых делений
 
     for (var i=1; i<=HOURS; i++) {
         var curNum = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        var angle = _angle/180*Math.PI;
+        var angle = _angle*i/180*Math.PI;
         var centerX = clockBoard.width.baseVal.value/2;
         var centerY = clockBoard.height.baseVal.value/2;
         curNum.setAttribute('fill', 'rgb(100, 225, 80)');
@@ -31,7 +30,6 @@ var fs = 18; //высота текста часовых делений
         curNumText.setAttribute('x', i > 9 ? Math.round(centerX+radius*Math.sin(angle)) - curNumText.textLength.baseVal.value/2 : Math.round(centerX+radius*Math.sin(angle)) - curNumText.textLength.baseVal.value/4);
         curNumText.setAttribute('y', Math.round(centerY-radius*Math.cos(angle)) + fs/2.5);
         curNumText.textContent = i;
-        _angle += ANGLE_TO_NEXT_DIGIT;
         clockBoard.appendChild(curNum);
         clockBoard.appendChild(curNumText);
     }
