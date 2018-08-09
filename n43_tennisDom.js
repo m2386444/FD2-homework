@@ -59,7 +59,8 @@ var leftRacketH = {
     posY: parseInt(leftRacket.style.top),
     speedY: 0,
     go: function (param) {
-        param == 'up' ? this.speedY = -10 : this.speedY = 10;
+        var self = this;
+        param == 'up' ? self.speedY = -10 : self.speedY = 10;
     },
     stop: function () {
         this.speedY = 0;
