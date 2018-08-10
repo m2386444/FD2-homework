@@ -262,10 +262,10 @@ function start () {
 document.onkeydown = function (eo) {
     eo=eo||window.event;
     switch (eo.keyCode) {
-        case 16:
+        case 87:
         leftRacketH.go('up');
         break;
-        case 17:
+        case 83:
         leftRacketH.go('down');
         break;
         case 38:
@@ -281,7 +281,7 @@ document.onkeydown = function (eo) {
 //останавливаем соответствующую ракетку по keyup
 document.onkeyup = function (eo) {
     eo=eo||window.event;
-    if (eo.keyCode == 16 || eo.keyCode == 17) {
+    if (eo.keyCode == 87 || eo.keyCode == 83) {
         leftRacketH.stop();
     }
     if (eo.keyCode == 38 || eo.keyCode == 40) {

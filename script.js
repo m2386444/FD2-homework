@@ -18,7 +18,7 @@ area.style.width = '650px';
 area.style.height = '350px';
 area.style.background = 'orange';
 area.style.position = 'relative';
-area.style.transform = 'rotate(90deg) translateX(200px)';
+area.style.transform = '';
 document.body.appendChild(area);
 
 var leftRacket = document.createElement('div');
@@ -64,14 +64,14 @@ var leftRacketH = {
         if (param == 'up') {
             if (self.posY) {
                 if (!self.speedY) {
-                    leftRacket.style.transform = 'rotate(5deg)'
+                    leftRacket.style.transform = 'rotate(-5deg)'
                     self.speedY = -10;
                 }
             }
         } else {
             if (self.posY != (areaH.height - leftRacketH.height)) {
                 if (!self.speedY) {
-                    leftRacket.style.transform = 'rotate(-5deg)'
+                    leftRacket.style.transform = 'rotate(5deg)'
                     self.speedY = 10;
                 }
             }
@@ -262,16 +262,16 @@ function start () {
 document.onkeydown = function (eo) {
     eo=eo||window.event;
     switch (eo.keyCode) {
-        case 18:
+        case 87:
         leftRacketH.go('up');
         break;
-        case 17:
+        case 83:
         leftRacketH.go('down');
         break;
-        case 39:
+        case 38:
         rightRacketH.go('up');
         break;
-        case 37:
+        case 40:
         rightRacketH.go('down');
         break;
         case 32:
@@ -281,10 +281,10 @@ document.onkeydown = function (eo) {
 //останавливаем соответствующую ракетку по keyup
 document.onkeyup = function (eo) {
     eo=eo||window.event;
-    if (eo.keyCode == 18 || eo.keyCode == 17) {
+    if (eo.keyCode == 87 || eo.keyCode == 83) {
         leftRacketH.stop();
     }
-    if (eo.keyCode == 39 || eo.keyCode == 37) {
+    if (eo.keyCode == 38 || eo.keyCode == 40) {
         rightRacketH.stop();
     }
 }
