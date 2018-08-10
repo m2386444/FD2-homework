@@ -64,12 +64,14 @@ var leftRacketH = {
         if (param == 'up') {
             if (self.posY) {
                 if (!self.speedY) {
+                    leftRacket.style.transform = 'rotate(5deg)'
                     self.speedY = -10;
                 }
             }
         } else {
             if (self.posY != (areaH.height - leftRacketH.height)) {
                 if (!self.speedY) {
+                    leftRacket.style.transform = 'rotate(-5deg)'
                     self.speedY = 10;
                 }
             }
@@ -77,6 +79,7 @@ var leftRacketH = {
     },
     stop: function () {
         this.speedY = 0;
+        leftRacket.style.transform = ''
     },
     update: function () {
         leftRacket.style.top = this.posY + 'px';
@@ -93,12 +96,14 @@ var rightRacketH = {
         if (param == 'up') {
             if (self.posY) {
                 if (!self.speedY) {
+                    rightRacket.style.transform = 'rotate(5deg)'
                     self.speedY = -10;
                 }
             }
         } else {
             if (self.posY != (areaH.height - rightRacketH.height)) {
                 if (!self.speedY) {
+                    rightRacket.style.transform = 'rotate(-5deg)'
                     self.speedY = 10;
                 }
             }
@@ -106,6 +111,7 @@ var rightRacketH = {
     },
     stop: function () {
         this.speedY = 0;
+        rightRacket.style.transform = '';
     },
     update: function () {
         rightRacket.style.top = this.posY + 'px';
@@ -136,9 +142,9 @@ function tick () {
     ballH.posY += ballH.speedY;
     //двигаем ракетки
     leftRacketH.posY += leftRacketH.speedY;
-    leftRacketH.speedY *= 1.03;
+    leftRacketH.speedY *= 1.03; //ускоряем ракетку
     rightRacketH.posY += rightRacketH.speedY;
-    rightRacketH.speedY *= 1.03;
+    rightRacketH.speedY *= 1.03; //ускоряем ракетку
     // console.log(leftRacketH.speedY, rightRacketH.speedY)
     //если скорость мяча маленькая - устанавливаем побольше
     if (ballH.speedX<5 && ballH.speedX>0) {
