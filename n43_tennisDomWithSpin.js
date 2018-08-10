@@ -250,8 +250,6 @@ function start () {
             }
         }
         requestAnimationFrame(tick);
-    } else {
-        console.log('-');
     }
 }
 //ускоряем соответствующую ракетку по keydown
