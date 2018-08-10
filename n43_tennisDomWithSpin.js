@@ -141,11 +141,11 @@ function tick () {
     rightRacketH.speedY *= 1.03;
     console.log(leftRacketH.speedY, rightRacketH.speedY)
 //если скорость мяча маленькая - устанавливаем побольше
-    if (ballH.speedX<5 && ballH.speedX>0) {
-        ballH.speedX = 5;
+    if (ballH.speedX<6 && ballH.speedX>0) {
+        ballH.speedX = 6;
     }
-    if (ballH.speedX<0 && ballH.speedX>-5) {
-        ballH.speedX = -5;
+    if (ballH.speedX<0 && ballH.speedX>-6) {
+        ballH.speedX = -6;
     }
     if (ballH.speedY<2 && ballH.speedY>0) {
         ballH.speedY = 2;
@@ -230,13 +230,13 @@ function start () {
     if ((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width) || ballH.posX <= 0) {
         ballH.posX = areaH.width/2-ballH.width/2;
         ballH.posY = areaH.height/2-ballH.height/2;
-        ballH.speedX = Math.random()*(7-(-7))+(-7);
+        ballH.speedX = Math.random()*(10-(-10))+(-10);
 //увеличиваем скорость мячика, если нужно
-        if (ballH.speedX<5 && ballH.speedX>0) {
-            ballH.speedX = 5;
+        if (ballH.speedX<6 && ballH.speedX>0) {
+            ballH.speedX = 6;
         }
-        if (ballH.speedX<0 && ballH.speedX>-5) {
-            ballH.speedX = -5;
+        if (ballH.speedX<0 && ballH.speedX>-6) {
+            ballH.speedX = -6;
         }
         ballH.speedY = Math.random()*(5-(-5))+(-5);
         if (ballH.speedY<2 && ballH.speedY>0) {
