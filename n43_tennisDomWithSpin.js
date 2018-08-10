@@ -226,28 +226,33 @@ function tick () {
     }
 }
 function start () {
-    timer = 0;
-    //если мячик не в центре - ставим его туда и запускаем в какую-то сторону
-    if ((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width) || ballH.posX <= 0) {
-        ballH.posX = areaH.width/2-ballH.width/2;
-        ballH.posY = areaH.height/2-ballH.height/2;
-        ballH.speedX = Math.random()*(7-(-7))+(-7);
-        //увеличиваем скорость мячика, если нужно
-        if (ballH.speedX<5 && ballH.speedX>0) {
-            ballH.speedX = 5;
+//проверяем находится ли мячик в центре или в положении гола(если да - обнуляем таймер и запускаем игру, если нет - ничего не делаем(защищаемся от повторных вызовов requestAnimationFrame))
+    if (ballH.posX == 0 || (ballH.posX + ballH.width) == (areaH.width) || ((ballH.posX == areaH.width/2-ballH.width/2)&&(ballH.posY == areaH.height/2-ballH.height/2))) {
+        timer = 0;
+        //если мячик не в центре - ставим его туда и запускаем в какую-то сторону
+        if ((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width) || ballH.posX <= 0) {
+            ballH.posX = areaH.width/2-ballH.width/2;
+            ballH.posY = areaH.height/2-ballH.height/2;
+            ballH.speedX = Math.random()*(7-(-7))+(-7);
+            //увеличиваем скорость мячика, если нужно
+            if (ballH.speedX<5 && ballH.speedX>0) {
+                ballH.speedX = 5;
+            }
+            if (ballH.speedX<0 && ballH.speedX>-5) {
+                ballH.speedX = -5;
+            }
+            ballH.speedY = Math.random()*(5-(-5))+(-5);
+            if (ballH.speedY<2 && ballH.speedY>0) {
+                ballH.speedY = 2;
+            }
+            if (ballH.speedY<0 && ballH.speedY>-2) {
+                ballH.speedY = -2;
+            }
         }
-        if (ballH.speedX<0 && ballH.speedX>-5) {
-            ballH.speedX = -5;
-        }
-        ballH.speedY = Math.random()*(5-(-5))+(-5);
-        if (ballH.speedY<2 && ballH.speedY>0) {
-            ballH.speedY = 2;
-        }
-        if (ballH.speedY<0 && ballH.speedY>-2) {
-            ballH.speedY = -2;
-        }
+        requestAnimationFrame(tick);
+    } else {
+        console.log('-');
     }
-    requestAnimationFrame(tick);
 }
 //ускоряем соответствующую ракетку по keydown
 document.onkeydown = function (eo) {
