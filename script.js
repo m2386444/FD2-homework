@@ -140,13 +140,13 @@ function tick () {
 //проверяем, отбила ли правая ракетка
     if (((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width)) && ((ballH.posY+ballH.height/2) > rightRacketH.posY) && ((ballH.posY+ballH.height/2) < (rightRacketH.posY+rightRacketH.height))) {
         ballH.speedX = -ballH.speedX*ballH.kick; //ускоряем мячик
-        ballH.speedY = rightRacketH.speedY/3; //меняем угол отскока мячика от ракетки
+        // ballH.speedY = rightRacketH.speedY/3; //меняем угол отскока мячика от ракетки
         ballH.posX = areaH.width - rightRacketH.width - ballH.width;
     }
 //проверяем, отбила ли левая ракетка
     if ((ballH.posX < leftRacketH.width) && ((ballH.posY+ballH.height/2) > leftRacketH.posY) && ((ballH.posY+ballH.height/2) < (leftRacketH.posY+leftRacketH.height))) {
         ballH.speedX = -ballH.speedX*ballH.kick; //ускоряем мячик
-        ballH.speedY = leftRacketH.speedY/3; //меняем угол отскока мячика от ракетки
+        // ballH.speedY = leftRacketH.speedY/3; //меняем угол отскока мячика от ракетки
         ballH.posX = leftRacketH.width;
     }
 //проверяем на гол правой стороне
