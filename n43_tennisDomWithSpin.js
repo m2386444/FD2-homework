@@ -130,22 +130,22 @@ var ballH = {
 ballH.update();
 
 function tick () {
-//двигаем мячик
+    //двигаем мячик
     ballH.posX += ballH.speedX;
     ballH.speedY += ballH.spin;
     ballH.posY += ballH.speedY;
-//двигаем ракетки
+    //двигаем ракетки
     leftRacketH.posY += leftRacketH.speedY;
     leftRacketH.speedY *= 1.03;
     rightRacketH.posY += rightRacketH.speedY;
     rightRacketH.speedY *= 1.03;
     console.log(leftRacketH.speedY, rightRacketH.speedY)
-//если скорость мяча маленькая - устанавливаем побольше
-    if (ballH.speedX<6 && ballH.speedX>0) {
-        ballH.speedX = 6;
+    //если скорость мяча маленькая - устанавливаем побольше
+    if (ballH.speedX<5 && ballH.speedX>0) {
+        ballH.speedX = 5;
     }
-    if (ballH.speedX<0 && ballH.speedX>-6) {
-        ballH.speedX = -6;
+    if (ballH.speedX<0 && ballH.speedX>-5) {
+        ballH.speedX = -5;
     }
     if (ballH.speedY<2 && ballH.speedY>0) {
         ballH.speedY = 2;
@@ -153,7 +153,7 @@ function tick () {
     if (ballH.speedY<0 && ballH.speedY>-2) {
         ballH.speedY = -2;
     }
-//ограничиваем движение правой ракетки в пределах высоты арены
+    //ограничиваем движение правой ракетки в пределах высоты арены
     if (rightRacketH.posY + rightRacketH.speedY < 0) {
         rightRacketH.posY = 0;
         rightRacketH.speedY = 0;
@@ -162,7 +162,7 @@ function tick () {
         rightRacketH.posY = areaH.height - rightRacketH.height;
         rightRacketH.speedY = 0;
     }
-//ограничиваем движение левой ракетки в пределах высоты арены
+    //ограничиваем движение левой ракетки в пределах высоты арены
     if (leftRacketH.posY + leftRacketH.speedY < 0) {
         leftRacketH.posY = 0;
         leftRacketH.speedY = 0;
@@ -171,46 +171,47 @@ function tick () {
         leftRacketH.posY = areaH.height - rightRacketH.height;
         leftRacketH.speedY = 0;
     }
-//проверяем, отбила ли правая ракетка
+    //проверяем, отбила ли правая ракетка
     if (((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width)) && ((ballH.posY+ballH.height/2) > rightRacketH.posY) && ((ballH.posY+ballH.height/2) < (rightRacketH.posY+rightRacketH.height))) {
         ballH.speedX = -ballH.speedX*ballH.kick; //ускоряем мячик ударом
         ballH.speedY += rightRacketH.speedY/10; //меняем угол отскока мячика от ракетки
         ballH.spin = -rightRacketH.speedY/300; //крутим мячик
         ballH.posX = areaH.width - rightRacketH.width - ballH.width;
     }
-//проверяем, отбила ли левая ракетка
+    //проверяем, отбила ли левая ракетка
     if ((ballH.posX < leftRacketH.width) && ((ballH.posY+ballH.height/2) > leftRacketH.posY) && ((ballH.posY+ballH.height/2) < (leftRacketH.posY+leftRacketH.height))) {
         ballH.speedX = -ballH.speedX*ballH.kick; //ускоряем мячик ударом
         ballH.speedY += leftRacketH.speedY/10; //меняем угол отскока мячика от ракетки
         ballH.spin = -leftRacketH.speedY/300; //крутим мячик
         ballH.posX = leftRacketH.width;
     }
-//проверяем на гол правой стороне
+    //проверяем на гол правой стороне
     if ((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width)) {
         ballH.posX = areaH.width-ballH.width;
+        ballH.speedY = 0;
         ballH.spin = 0;
-        clearInterval(timer);
-        timer = 0;
         leftPoints++;
+        timer++;
         goals.innerHTML = leftPoints + ' : ' + rightPoints;
+        
     }
-//проверяем на гол левой стороне
+    //проверяем на гол левой стороне
     if (ballH.posX < 0) {
         ballH.posX = 0;
         ballH.spin = 0;
-        clearInterval(timer);
-        timer = 0;
         rightPoints++;
+        timer++;
         goals.innerHTML = leftPoints + ' : ' + rightPoints;
+        
     }
-//отскок мячика от низа
+    //отскок мячика от низа
     if (ballH.posY+ballH.height > areaH.height) {
         ballH.speedX *= ballH.elast; //притормаживаем мячик
         ballH.speedY = -ballH.speedY;
         ballH.spin = -ballH.spin;
         ballH.posY = areaH.height-ballH.height;
     }
-//отскок мячика от верха
+    //отскок мячика от верха
     if (ballH.posY < 0) {
         ballH.speedX *= ballH.elast; //притормаживаем мячик
         ballH.speedY = -ballH.speedY;
@@ -220,23 +221,23 @@ function tick () {
     ballH.update();
     leftRacketH.update();
     rightRacketH.update();
+    if (!timer) {
+        requestAnimationFrame(tick);
+    }
 }
 function start () {
-    if (timer) {
-        clearInterval(timer);
-        timer = 0;
-    }
-//если мячик не в центре - ставим его туда и запускаем в какую-то сторону
+    timer = 0;
+    //если мячик не в центре - ставим его туда и запускаем в какую-то сторону
     if ((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width) || ballH.posX <= 0) {
         ballH.posX = areaH.width/2-ballH.width/2;
         ballH.posY = areaH.height/2-ballH.height/2;
-        ballH.speedX = Math.random()*(10-(-10))+(-10);
-//увеличиваем скорость мячика, если нужно
-        if (ballH.speedX<6 && ballH.speedX>0) {
-            ballH.speedX = 6;
+        ballH.speedX = Math.random()*(7-(-7))+(-7);
+        //увеличиваем скорость мячика, если нужно
+        if (ballH.speedX<5 && ballH.speedX>0) {
+            ballH.speedX = 5;
         }
-        if (ballH.speedX<0 && ballH.speedX>-6) {
-            ballH.speedX = -6;
+        if (ballH.speedX<0 && ballH.speedX>-5) {
+            ballH.speedX = -5;
         }
         ballH.speedY = Math.random()*(5-(-5))+(-5);
         if (ballH.speedY<2 && ballH.speedY>0) {
@@ -246,7 +247,7 @@ function start () {
             ballH.speedY = -2;
         }
     }
-    timer = setInterval(tick, 40);
+    requestAnimationFrame(tick);
 }
 //ускоряем соответствующую ракетку по keydown
 document.onkeydown = function (eo) {
@@ -264,6 +265,8 @@ document.onkeydown = function (eo) {
         case 37:
         rightRacketH.go('down');
         break;
+        case 32:
+        start();
     }
 }
 //останавливаем соответствующую ракетку по keyup
