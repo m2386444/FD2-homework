@@ -92,7 +92,7 @@ var ballH = {
     height: parseInt(ballElem.style.height),
     speedX: Math.random()*(7-(-7))+(-7),
     speedY: Math.random()*(10-(-10))+(-10),
-    kick: 1.075,
+    kick: 1.1,
     elast: 0.95,
     posX: parseInt(area.style.width)/2 - parseInt(ballElem.style.width)/2,
     posY: parseInt(area.style.height)/2 - parseInt(ballElem.style.height)/2,
