@@ -139,7 +139,7 @@ function tick () {
     leftRacketH.speedY *= 1.03;
     rightRacketH.posY += rightRacketH.speedY;
     rightRacketH.speedY *= 1.03;
-    console.log(leftRacketH.speedY, rightRacketH.speedY)
+    // console.log(leftRacketH.speedY, rightRacketH.speedY)
     //если скорость мяча маленькая - устанавливаем побольше
     if (ballH.speedX<5 && ballH.speedX>0) {
         ballH.speedX = 5;
