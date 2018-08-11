@@ -1,3 +1,4 @@
+'use strict'
 var but = document.createElement('button');
 but.innerHTML = 'Старт!';
 but.addEventListener('click', start);
@@ -41,7 +42,6 @@ rightRacket.style.left = parseInt(area.style.width) - parseInt(rightRacket.style
 rightRacket.style.top = parseInt(area.style.height)/2 - parseInt(rightRacket.style.height)/2 + 'px';
 area.appendChild(rightRacket);
 
-
 var ballElem = document.createElement('div');
 ballElem.style.width = '20px';
 ballElem.style.height = '20px';
@@ -49,6 +49,54 @@ ballElem.style.position = 'absolute';
 ballElem.style.background = 'blue';
 ballElem.style.borderRadius = '50%';
 area.appendChild(ballElem);
+
+
+var racket1Sound = new Audio('/racket1.ogg');
+var racket2Sound = new Audio('/racket2.ogg');
+var wallSound = new Audio('/wall.ogg');
+var whistSound = new Audio('/whistSound.mp3');
+var shortWhistSound = new Audio('/shortWhistSound.mp3');
+
+function racket1SoundInit () {
+    racket1Sound.play();
+    racket1Sound.pause();
+}
+function racket1SoundPlay () {
+    racket1Sound.currentTime=0;
+    racket1Sound.play();
+}
+function racket2SoundInit () {
+    racket2Sound.play();
+    racket2Sound.pause();
+}
+function racket2SoundPlay () {
+    racket2Sound.currentTime=0;
+    racket2Sound.play();
+}
+function wallSoundInit () {
+    wallSound.play();
+    wallSound.pause();
+}
+function wallSoundPlay () {
+    wallSound.currentTime=0;
+    wallSound.play();
+}
+function whistSoundInit () {
+    whistSound.play();
+    whistSound.pause();
+}
+function whistSoundPlay () {
+    whistSound.currentTime=0;
+    whistSound.play();
+}
+function shortWhistSoundInit () {
+    shortWhistSound.play();
+    shortWhistSound.pause();
+}
+function shortWhistSoundPlay () {
+    shortWhistSound.currentTime=0;
+    shortWhistSound.play();
+}
 
 var areaH = {
     width: parseInt(area.style.width),
@@ -179,6 +227,7 @@ function tick () {
     }
     //проверяем, отбила ли правая ракетка
     if (((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width)) && ((ballH.posY+ballH.height/2) > rightRacketH.posY) && ((ballH.posY+ballH.height/2) < (rightRacketH.posY+rightRacketH.height))) {
+        racket1SoundPlay();
         ballH.speedX = -ballH.speedX*ballH.kick; //ускоряем мячик ударом
         ballH.speedY += rightRacketH.speedY/10; //меняем угол отскока мячика от ракетки
         ballH.spin = -rightRacketH.speedY/300; //крутим мячик
@@ -186,6 +235,7 @@ function tick () {
     }
     //проверяем, отбила ли левая ракетка
     if ((ballH.posX < leftRacketH.width) && ((ballH.posY+ballH.height/2) > leftRacketH.posY) && ((ballH.posY+ballH.height/2) < (leftRacketH.posY+leftRacketH.height))) {
+        racket2SoundPlay();
         ballH.speedX = -ballH.speedX*ballH.kick; //ускоряем мячик ударом
         ballH.speedY += leftRacketH.speedY/10; //меняем угол отскока мячика от ракетки
         ballH.spin = -leftRacketH.speedY/300; //крутим мячик
@@ -196,6 +246,7 @@ function tick () {
         ballH.posX = areaH.width-ballH.width;
         ballH.speedY = 0;
         ballH.spin = 0;
+        whistSoundPlay();
         leftPoints++;
         timer++;
         goals.innerHTML = leftPoints + ' : ' + rightPoints;
@@ -204,7 +255,9 @@ function tick () {
     //проверяем на гол левой стороне
     if (ballH.posX < 0) {
         ballH.posX = 0;
+        ballH.speedY = 0;
         ballH.spin = 0;
+        whistSoundPlay();
         rightPoints++;
         timer++;
         goals.innerHTML = leftPoints + ' : ' + rightPoints;
@@ -212,6 +265,7 @@ function tick () {
     }
     //отскок мячика от низа
     if (ballH.posY+ballH.height > areaH.height) {
+        wallSoundPlay();
         ballH.speedX *= ballH.elast; //притормаживаем мячик
         ballH.speedY = -ballH.speedY;
         ballH.spin = -ballH.spin;
@@ -219,6 +273,7 @@ function tick () {
     }
     //отскок мячика от верха
     if (ballH.posY < 0) {
+        wallSoundPlay();
         ballH.speedX *= ballH.elast; //притормаживаем мячик
         ballH.speedY = -ballH.speedY;
         ballH.spin = -ballH.spin;
@@ -255,6 +310,12 @@ function start () {
                 ballH.speedY = -2;
             }
         }
+        whistSoundInit();
+        shortWhistSoundInit();
+        racket1SoundInit();
+        racket2SoundInit();
+        wallSoundInit();
+        shortWhistSoundPlay();
         requestAnimationFrame(tick);
     }
 }
