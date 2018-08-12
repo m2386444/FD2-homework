@@ -27,7 +27,7 @@ var leftRacketH = {
     speedY: 0,
     go: function (param) {
             var self = this;
-            if (param == 'up') {
+            if (param == true) {
                 if ((self.posY-self.height/2)>0) {
                     if (!self.speedY) {
                         self.speedY = -10;
@@ -56,7 +56,7 @@ var rightRacketH = {
     speedY: 0,
     go: function (param) {
             var self = this;
-            if (param == 'up') {
+            if (param == true) {
                 if (self.posY-self.height/2>0) {
                     if (!self.speedY) {
                         self.speedY = -10;
@@ -305,13 +305,13 @@ document.onkeydown = function (eo) {
         eo=eo||window.event;
     switch (eo.keyCode) {
             case 16:
-            leftRacketH.go('up');
+            leftRacketH.go(true);
             break;
             case 17:
             leftRacketH.go('down');
             break;
             case 38:
-            rightRacketH.go('up');
+            rightRacketH.go(true);
             break;
             case 40:
             rightRacketH.go('down');
