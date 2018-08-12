@@ -51,11 +51,11 @@ ballElem.style.borderRadius = '50%';
 area.appendChild(ballElem);
 
 //создаем звуки
-var racket1Sound = new Audio('/racket1.ogg');
-var racket2Sound = new Audio('/racket2.ogg');
-var wallSound = new Audio('/wall.ogg');
-var whistSound = new Audio('/whistSound.mp3');
-var shortWhistSound = new Audio('/shortWhistSound.mp3');
+var racket1Sound = new Audio('racket1.ogg');
+var racket2Sound = new Audio('racket2.ogg');
+var wallSound = new Audio('wall.ogg');
+var whistSound = new Audio('whistSound.mp3');
+var shortWhistSound = new Audio('shortWhistSound.mp3');
 
 function racket1SoundInit () {
     racket1Sound.play();
@@ -144,14 +144,14 @@ var rightRacketH = {
         if (param == 'up') {
             if (self.posY) {
                 if (!self.speedY) {
-                    rightRacket.style.transform = 'rotate(5deg)'
+                    rightRacket.style.transform += ' rotate(5deg)'
                     self.speedY = -10;
                 }
             }
         } else {
             if (self.posY != (areaH.height - rightRacketH.height)) {
                 if (!self.speedY) {
-                    rightRacket.style.transform = 'rotate(-5deg)'
+                    rightRacket.style.transform += ' rotate(-5deg)'
                     self.speedY = 10;
                 }
             }
