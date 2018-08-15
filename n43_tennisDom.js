@@ -5,7 +5,7 @@ document.body.appendChild(but);
 var goals = document.createElement('span');
 var leftPoints = 0;
 var rightPoints = 0;
-var timer = 0;
+var gameStage = 0;
 goals.style.margin = '0 0 0 50px';
 goals.innerHTML = leftPoints + ' : ' + rightPoints;
 document.body.appendChild(goals);
@@ -22,7 +22,7 @@ document.body.appendChild(area);
 
 var leftRacket = document.createElement('div');
 leftRacket.style.width = '10px';
-leftRacket.style.height = '70px';
+leftRacket.style.height = '100px';
 leftRacket.style.background = 'green';
 leftRacket.style.borderRadius = '100%';
 leftRacket.style.position = 'absolute';
@@ -32,7 +32,7 @@ area.appendChild(leftRacket);
 
 var rightRacket = document.createElement('div');
 rightRacket.style.width = '10px';
-rightRacket.style.height = '70px';
+rightRacket.style.height = '100px';
 rightRacket.style.background = 'red';
 rightRacket.style.borderRadius = '100%';
 rightRacket.style.position = 'absolute';
@@ -103,7 +103,55 @@ var ballH = {
 }   
 ballH.update();
 
+//создаем звуки
+var racket1Sound = new Audio('racket1.ogg');
+var racket2Sound = new Audio('racket2.ogg');
+var wallSound = new Audio('wall.ogg');
+var whistSound = new Audio('whistSound.mp3');
+var shortWhistSound = new Audio('shortWhistSound.mp3');
+
+function racket1SoundInit () {
+    racket1Sound.play();
+    racket1Sound.pause();
+}
+function racket1SoundPlay () {
+    racket1Sound.currentTime=0;
+    racket1Sound.play();
+}
+function racket2SoundInit () {
+    racket2Sound.play();
+    racket2Sound.pause();
+}
+function racket2SoundPlay () {
+    racket2Sound.currentTime=0;
+    racket2Sound.play();
+}
+function wallSoundInit () {
+    wallSound.play();
+    wallSound.pause();
+}
+function wallSoundPlay () {
+    wallSound.currentTime=0;
+    wallSound.play();
+}
+function whistSoundInit () {
+    whistSound.play();
+    whistSound.pause();
+}
+function whistSoundPlay () {
+    whistSound.currentTime=0;
+    whistSound.play();
+}
+function shortWhistSoundInit () {
+    shortWhistSound.play();
+    shortWhistSound.pause();
+}
+function shortWhistSoundPlay () {
+    shortWhistSound.currentTime=0;
+    shortWhistSound.play();
+}
 function tick () {
+    if(gameStage != 2)
 //двигаем мячик
     ballH.posX += ballH.speedX;
     ballH.posY += ballH.speedY;
@@ -152,16 +200,16 @@ function tick () {
 //проверяем на гол правой стороне
     if ((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width)) {
         ballH.posX = areaH.width-ballH.width;
-        clearInterval(timer);
-        timer = 0;
+        gameStage = 2;
+        whistSoundPlay();
         leftPoints++;
         goals.innerHTML = leftPoints + ' : ' + rightPoints;
     }
 //проверяем на гол левой стороне
     if (ballH.posX < 0) {
         ballH.posX = 0;
-        clearInterval(timer);
-        timer = 0;
+        gameStage = 2;
+        whistSoundPlay();
         rightPoints++;
         goals.innerHTML = leftPoints + ' : ' + rightPoints;
     }
@@ -180,12 +228,11 @@ function tick () {
     ballH.update();
     leftRacketH.update();
     rightRacketH.update();
+    if (gameStage == 1)
+    requestAnimationFrame(tick);
 }
 function start () {
-    if (timer) {
-        clearInterval(timer);
-        timer = 0;
-    }
+    if (gameStage != 1)
 //если мячик не в центре - ставим его туда и запускаем в какую-то сторону
     if ((ballH.posX + ballH.width) > (areaH.width - rightRacketH.width) || ballH.posX <= 0) {
         ballH.posX = areaH.width/2-ballH.width/2;
@@ -206,7 +253,8 @@ function start () {
             ballH.speedY = -4;
         }
     }
-    timer = setInterval(tick, 40);
+    gameStage = 1;
+    requestAnimationFrame(tick);
 }
 //ускоряем соответствующую ракетку по keydown
 document.onkeydown = function (eo) {
@@ -224,6 +272,8 @@ document.onkeydown = function (eo) {
         case 40:
         rightRacketH.go('down');
         break;
+        case 32:
+        start();
     }
 }
 //останавливаем соответствующую ракетку по keyup
