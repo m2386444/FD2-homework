@@ -3,15 +3,22 @@
 <head>
     <title>n13_HashStorage</title>
     <meta charset="UTF-8"/>
-    <script src="n13_HashStorage.js"></script>
+    <!-- <script src="n13_HashStorage.js"></script> -->
+    <script src="n53_LocStorage.js"></script>
 
 </head>
 <body>
 
-<input type="button" id='set' onclick="av()" value="Ввод информации о напитке"></input>
-<input type="button" id='get' onclick="gv()" value="Получение информации о напитке"></input>
-<input type="button" id='del' onclick="dv()" value="Удаление информации о напитке"></input>
-<input type="button" id='list' onclick="l()" value="Перечень всех напитков"></input>
+<input type="button" id='set' onclick="av(drinkStorage)" value="Ввод информации о напитке"></input>
+<input type="button" id='get' onclick="gv(drinkStorage)" value="Получение информации о напитке"></input>
+<input type="button" id='del' onclick="dv(drinkStorage)" value="Удаление информации о напитке"></input>
+<input type="button" id='list' onclick="l(drinkStorage)" value="Перечень всех напитков"></input>
+<br/>
+<br/>
+<input type="button" id='set1' onclick="av(foodStorage)" value="Ввод информации о блюде"></input>
+<input type="button" id='get1' onclick="gv(foodStorage)" value="Получение информации о блюде"></input>
+<input type="button" id='del1' onclick="dv(foodStorage)" value="Удаление информации о блюде"></input>
+<input type="button" id='list1' onclick="l(foodStorage)" value="Перечень всех блюд"></input>
 
     
 </body>

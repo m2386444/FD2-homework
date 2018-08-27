@@ -24,39 +24,6 @@ function LocStorage (lsn) {
     }
     this.getKeys = function () { return Object.keys(this.storage); }
 }
-var drinkStorage = new LocStorage('drinks');
-var foodStorage = new LocStorage('food');
-
-// class HashStorage {
-//     constructor () {
-//         this.storage = {};
-//     }
-//     addValue(name, value) {
-//         this.storage[name] = value;
-//         window.localStorage[lsn] = JSON.stringify(this.storage);
-//     }
-//     getValue(key) {
-//         if (Object.keys(this.storage).indexOf(key) > -1) {
-//             return this.storage[key];
-//         } else {
-//             return undefined;
-//         }
-//     }
-//     deleteValue(key) {
-//         if(Object.keys(this.storage).indexOf(key) > -1) {
-//             delete this.storage[key];
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     }
-//     getKeys() {
-//         return Object.keys(this.storage);
-//     }
-// }
-    
-// var drinkStorage = new HashStorage;
-
 
 function av (param) {
     if (param == drinkStorage) {
@@ -129,9 +96,13 @@ function l (param) {
     }
 }
 
+var drinkStorage = new LocStorage('drinks');
+var foodStorage = new LocStorage('food');
 
 
 // drinkStorage.addValue('текила', {'Алкогольный': 'true', 'Крепость': '38%', 'Рецепт приготовления': 'salt + spirit + lime', 'Рекомендуемая доза': '5шт'});
 // drinkStorage.addValue('водка', {'Алкогольный': 'true', 'Крепость': '40%', 'Рецепт': 'спирт + вода + декстроза + сахар', 'Рекомендуемая доза': '1шт'});
 // drinkStorage.addValue('маргарита', {'Алкогольный': 'true', 'Крепость': '12%', 'Рецепт': 'лаймовый сок + сахарный сироп + ликер трипл сек + серебряная текила', 'Рекомендуемая доза': '3шт'});
 // drinkStorage.addValue('коньяк', {'Алкогольный': 'true', 'Крепость': '40%', 'Рецепт': 'водка + сахар + кора дуба + специи', 'Рекомендуемая доза': '2шт'});
+
+// foodStorage.addValue('салат', {'Рецепт': 'кора дуба + специи', 'Рекомендуемая доза': '2шт'});

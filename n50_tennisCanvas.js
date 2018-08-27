@@ -45,11 +45,11 @@ var leftRacketH = {
         },
     stop: function () {
             this.speedY = 0;
-        },
-    update: function () {
-            leftRacket.y1.baseVal.value += this.speedY;
-            leftRacket.y2.baseVal.value += this.speedY;
         }
+    // update: function () {
+    //         leftRacket.y1.baseVal.value += this.speedY;
+    //         leftRacket.y2.baseVal.value += this.speedY;
+    //     }
 }
 var rightRacketH = {
     width: areaH.width/75,
@@ -71,6 +71,7 @@ var rightRacketH = {
                     }
                 }
             }
+            console.log(self.speedY);
         },
     stop: function () {
         var self = this;
@@ -254,6 +255,7 @@ function start () {
         requestAnimationFrame(tick);
     }
 }
+//CONTROLLER
 //ускоряем соответствующую ракетку по keydown
 document.onkeydown = function (eo) {
     eo=eo||window.event;
