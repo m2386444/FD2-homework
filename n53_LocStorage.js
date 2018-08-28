@@ -11,12 +11,12 @@ function LocStorage (lsn) {
         window.localStorage[lsn] = JSON.stringify(this.storage);
     }
     this.getValue = function (key) {
-        if (Object.keys(this.storage).indexOf(key) > -1) {
+        if (key in this.storage) {
             return this.storage[key];
         } else { return undefined }
     }
     this.deleteValue = function (key) {
-        if (Object.keys(this.storage).indexOf(key) > -1) {
+        if (key in this.storage) {
             delete this.storage[key];
             window.localStorage[lsn] = JSON.stringify(this.storage);
             return true;
@@ -28,22 +28,22 @@ function LocStorage (lsn) {
 function av (param) {
     if (param == drinkStorage) {
         param.addValue(prompt('Введите название напитка'), {'Алкогольный': confirm('Напиток алкогольный? OK - да, Отмена - нет'), 'Крепость, %': prompt('Введите крепость напитка'), 'Рецепт приготовления': prompt('Введите рецепт приготовления'), 'Рекомендуемая доза': prompt('Введите рекомендуемую дозу', '0')});
-        if (Object.keys(param.storage).indexOf("null") > -1) {
+        if ('null' in param.storage) {
             delete param.storage[null];
         }
     } else if (param == foodStorage) {
         param.addValue(prompt('Введите название блюда'), {'Рецепт приготовления': prompt('Введите рецепт приготовления'), 'Рекомендуемая доза': prompt('Введите рекомендуемую порцию', '0')});
-        if (Object.keys(param.storage).indexOf("null") > -1) {
+        if ('null' in param.storage) {
             delete param.storage[null];
         }
     }
 }
-function gv (param, arg = prompt('Какой напиток показать?')) {
+function gv (param, arg = prompt('Что показать?')) {
     if (param == drinkStorage) {
-        if (Object.keys(drinkStorage.storage).indexOf(arg) > -1) {
+        if (arg in param.storage) {
             var res = "Напиток: " + arg + "\n";
-            for (var prop in drinkStorage.getValue(arg)) {
-                res += prop + ': ' + drinkStorage.getValue(arg)[prop] + "\n";
+            for (var prop in param.getValue(arg)) {
+                res += prop + ': ' + param.getValue(arg)[prop] + "\n";
                 res = res.replace("true", "да");
                 res = res.replace("false", "нет");
             }
@@ -52,10 +52,10 @@ function gv (param, arg = prompt('Какой напиток показать?'))
             alert('Напиток ' + '"' + arg + '"' + ' ' + 'не найден');
         }
     } else if (param == foodStorage) {
-        if (Object.keys(foodStorage.storage).indexOf(arg) > -1) {
-            var res = "Напиток: " + arg + "\n";
-            for (var prop in foodStorage.getValue(arg)) {
-                res += prop + ': ' + foodStorage.getValue(arg)[prop] + "\n";
+        if (arg in param.storage) {
+            var res = "Блюдо: " + arg + "\n";
+            for (var prop in param.getValue(arg)) {
+                res += prop + ': ' + param.getValue(arg)[prop] + "\n";
             }
             alert(res);
         } else {
@@ -63,16 +63,16 @@ function gv (param, arg = prompt('Какой напиток показать?'))
         }
     }
 }
-function dv (param, arg = prompt('Какой напиток удалить?')) {
+function dv (param, arg = prompt('Что удалить?')) {
     if (param == drinkStorage) {
-        if (Object.keys(drinkStorage.storage).indexOf(arg) > -1) {
+        if (arg in param.storage) {
             drinkStorage.deleteValue(arg);
             alert('Напиток ' + '"' + arg + '"' + ' ' + 'удален');
         } else {
             alert('Напиток не найден');
         }
     } else if (param ==foodStorage) {
-        if (Object.keys(foodStorage.storage).indexOf(arg) > -1) {
+        if (arg in param.storage) {
             foodStorage.deleteValue(arg);
             alert('Блюдо ' + '"' + arg + '"' + ' ' + 'удалено');
         } else {
