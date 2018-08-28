@@ -47,12 +47,10 @@ var formDef2 = [];
         
     function gotForm1 (callresult) {
         formDef1 = JSON.parse(callresult.result)
-        console.log(formDef1)
         makeForm(formElement, formDef1);
     }
     function gotForm2 (callresult) {
         formDef2 = JSON.parse(callresult.result)
-        console.log(formDef2)
         makeForm(formElement, formDef2);
     }
         
